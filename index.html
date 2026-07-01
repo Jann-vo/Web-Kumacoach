@@ -60,7 +60,7 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,10,.95);ba
 .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.mobile-menu{display:none;position:fixed;top:57px;left:0;right:0;background:rgba(10,10,10,.98);border-bottom:1px solid #1a1a1a;padding:20px 24px;z-index:99;flex-direction:column;gap:0}
+.mobile-menu{display:none;position:fixed;top:57px;left:0;right:0;background:rgba(10,10,10,.98);border-bottom:1px solid #1a1a1a;padding:20px 24px;z-index:99;flex-direction:column;gap:0;overflow-y:auto;max-height:calc(100vh - 57px)}
 .mobile-menu.open{display:flex}
 .mobile-menu a{color:#aaa;text-decoration:none;font-size:14px;letter-spacing:1px;text-transform:uppercase;padding:14px 0;border-bottom:1px solid #1a1a1a;transition:.2s}
 .mobile-menu a:last-child{border-bottom:none;color:var(--gold);font-weight:800;padding-top:16px}
@@ -295,7 +295,9 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 
 /* ── MOBILE ── */
 @media(max-width:768px){
-  nav{padding:14px 20px}
+  nav{padding:10px 20px}
+  .logo img{height:44px!important}
+  .mobile-menu{top:65px;max-height:calc(100vh - 65px)}
   .nav-links,.nav-cta{display:none}
   .hamburger{display:flex}
   .hero-grid{grid-template-columns:1fr;display:block;position:relative;min-height:100vh}
@@ -457,7 +459,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="logo">
+  <a href="#" class="logo" onclick="filterPage('home');window.scrollTo({top:0,behavior:'smooth'});return false">
     <img src="assets/logos/Logo_Kumacoach_2.png" alt="KumaCoach" class="logo-remove-bg" style="height:88px;width:auto;display:block;object-fit:contain;filter:brightness(1.05)"/>
   </a>
   <ul class="nav-links">
@@ -2045,11 +2047,11 @@ function addToCart(btn) {
   var price = parseInt(card.dataset.price);
   var img   = card.dataset.img;
   if (cart[id]) {
-    btn.textContent = '✓ Đã có trong giỏ';
+    btn.textContent = currentLang === 'en' ? '✓ Already in cart' : '✓ Đã có trong giỏ';
     return;
   }
   cart[id] = { id: id, title: title, price: price, img: img };
-  btn.textContent = '✓ Đã thêm';
+  btn.textContent = currentLang === 'en' ? '✓ Added!' : '✓ Đã thêm';
   btn.classList.add('in-cart');
   renderCart();
   openCart();
@@ -2060,7 +2062,7 @@ function removeFromCart(id) {
   var card = document.querySelector('.ebook-card[data-id="'+id+'"]');
   if (card) {
     var btn = card.querySelector('.ebook-add-btn');
-    btn.textContent = '+ Thêm vào giỏ';
+    btn.textContent = currentLang === 'en' ? '+ Add to Cart' : '+ Thêm vào giỏ';
     btn.classList.remove('in-cart');
   }
   renderCart();
@@ -2079,7 +2081,7 @@ function renderCart() {
   btn.disabled = items.length === 0;
 
   if (items.length === 0) {
-    list.innerHTML = '<div class="cart-empty">Giỏ hàng trống</div>';
+    list.innerHTML = '<div class="cart-empty">' + (currentLang === 'en' ? 'Cart is empty' : 'Giỏ hàng trống') + '</div>';
     total.textContent = '0 vnđ';
     return;
   }
@@ -2172,7 +2174,7 @@ function goToStep2() {
   document.getElementById('totalDisplay').textContent = _orderTotal.toLocaleString('vi-VN') + ' vnđ';
   var btn = document.getElementById('paymentSubmitBtn');
   btn.disabled = false;
-  btn.textContent = '✓ ĐÃ CHUYỂN KHOẢN · XÁC NHẬN';
+  btn.textContent = currentLang === 'en' ? '✓ TRANSFERRED · CONFIRM' : '✓ ĐÃ CHUYỂN KHOẢN · XÁC NHẬN';
   btn.style.background = 'var(--gold)';
   btn.style.color = '#000';
   document.getElementById('modalStep1').style.display = 'none';
@@ -2218,7 +2220,7 @@ function submitOrder() {
   var itemNames = items.map(function(i){ return i.title; }).join(' | ');
   var btn = document.getElementById('paymentSubmitBtn');
   btn.disabled = true;
-  btn.textContent = 'Đang gửi...';
+  btn.textContent = currentLang === 'en' ? 'Sending...' : 'Đang gửi...';
 
   var payload = { orderCode: _orderCode, name: name, phone: phone, email: email, note: _orderCode, items: itemNames, total: _orderTotal };
 
@@ -2227,7 +2229,7 @@ function submitOrder() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   }).then(function(){
-    document.getElementById('successCode').textContent = 'Mã đơn hàng: ' + _orderCode;
+    document.getElementById('successCode').textContent = (currentLang === 'en' ? 'Order code: ' : 'Mã đơn hàng: ') + _orderCode;
     document.getElementById('modalStep2').style.display = 'none';
     document.getElementById('modalStep3').style.display = 'block';
     setStep(3);
@@ -2235,8 +2237,8 @@ function submitOrder() {
     renderCart();
   }).catch(function(){
     btn.disabled = false;
-    btn.textContent = '✓ ĐÃ CHUYỂN KHOẢN · XÁC NHẬN';
-    alert('Có lỗi xảy ra. Vui lòng nhắn tin qua Facebook hoặc Instagram để được hỗ trợ.');
+    btn.textContent = currentLang === 'en' ? '✓ TRANSFERRED · CONFIRM' : '✓ ĐÃ CHUYỂN KHOẢN · XÁC NHẬN';
+    alert(currentLang === 'en' ? 'An error occurred. Please message us on Facebook or Instagram for support.' : 'Có lỗi xảy ra. Vui lòng nhắn tin qua Facebook hoặc Instagram để được hỗ trợ.');
   });
 }
 
@@ -2673,6 +2675,12 @@ function applyLang(lang){
   document.documentElement.lang = lang;
   document.getElementById('btnVI').classList.toggle('active', lang==='vi');
   document.getElementById('btnEN').classList.toggle('active', lang==='en');
+  // Re-render cart text so dynamic strings update with language
+  if (typeof renderCart === 'function') renderCart();
+  // Update in-cart button states
+  document.querySelectorAll('.ebook-add-btn.in-cart').forEach(function(btn){
+    btn.textContent = lang === 'en' ? '✓ In Cart' : '✓ Đã thêm';
+  });
 }
 
 window.setLang = function(lang){

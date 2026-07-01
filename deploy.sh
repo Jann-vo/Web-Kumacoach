@@ -90,8 +90,9 @@ echo "🔗 Fixing JS gallery path..."
 sed -i '' "s|const BASE = '/Users/cps/Downloads/Kuma Coach/Bài Đăng Training Kuma/';|const BASE = 'assets/training/';|g" "$HTML_OUT"
 sed -i '' "s|const EXT = '.png';|const EXT = '.jpg';|g" "$HTML_OUT"
 
-leftover=$(grep -c '/Users/cps/' "$HTML_OUT" 2>/dev/null || echo 0)
-if [ "$leftover" -gt 0 ]; then
+leftover=$(grep -c '/Users/cps/' "$HTML_OUT" 2>/dev/null; true)
+leftover=${leftover:-0}
+if [ "${leftover}" -gt 0 ] 2>/dev/null; then
   echo "⚠️  $leftover unreplaced local paths remain:"
   grep -o '/Users/cps/[^"'\'']*' "$HTML_OUT" | sort -u | sed 's/^/    /'
 else
