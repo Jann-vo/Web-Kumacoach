@@ -162,6 +162,7 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,10,.95);ba
 .svc-tier.best{border-color:rgba(212,160,23,.5);background:rgba(212,160,23,.06)}
 .svc-tier-label{font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
 .svc-tier-label.best-badge::after{content:' · TIẾT KIỆM';color:#888;font-weight:600;letter-spacing:0}
+html[lang="en"] .svc-tier-label.best-badge::after{content:' · BEST VALUE'}
 .svc-tier-duration{font-size:13px;color:#777;margin-bottom:8px}
 .svc-tier-amount{font-size:20px;font-weight:900;color:#fff;line-height:1}
 .svc-tier-note{font-size:11px;color:#666;margin-top:6px;line-height:1.5}
@@ -186,7 +187,8 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,10,.95);ba
 .lord-ig-meta{font-size:12px;color:#666;margin-bottom:4px}
 .lord-ig-bio{font-size:12px;color:#888;line-height:1.5}
 .lord-ig-cta{font-size:11px;font-weight:700;letter-spacing:1px;color:var(--gold);flex-shrink:0}
-@media(max-width:768px){.lord-coaches{grid-template-columns:repeat(2,1fr)}.lord-ig-card{flex-direction:column;text-align:center}.lord-photo-row{grid-template-columns:1fr!important}}
+@media(max-width:768px){.lord-coaches{grid-template-columns:repeat(2,1fr)!important}.lord-ig-card{flex-direction:column;text-align:center}.lord-photo-row{grid-template-columns:1fr!important}}
+@media(max-width:480px){.lord-coaches{grid-template-columns:1fr!important}}
 
 
 /* ── HOW WE WORK ── */
@@ -323,6 +325,13 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
   .section-header{margin-bottom:40px}
   footer{flex-direction:column;text-align:center;padding:30px 24px}
   .footer-links{justify-content:center}
+  #certificates{padding:60px 20px!important}
+  #athletes{padding:60px 20px!important}
+  #ebook>div{padding:60px 20px!important}
+  #yt-showcase{padding:60px 20px!important}
+  .services-grid .svc-card:nth-child(5){grid-column:1/-1}
+  .svc-features[style*="columns"]{columns:1!important;column-gap:0!important}
+  #feedback{padding:60px 0}
 }
 @media(max-width:480px){
   .social-grid{grid-template-columns:1fr}
@@ -449,7 +458,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 <!-- NAV -->
 <nav>
   <a href="#hero" class="logo">
-    <img src="assets/Logo_Kumacoach_2.png" alt="KumaCoach" class="logo-remove-bg" style="height:88px;width:auto;display:block;object-fit:contain;filter:brightness(1.05)"/>
+    <img src="assets/logos/Logo_Kumacoach_2.png" alt="KumaCoach" class="logo-remove-bg" style="height:88px;width:auto;display:block;object-fit:contain;filter:brightness(1.05)"/>
   </a>
   <ul class="nav-links">
     <li><a href="#" data-filter="home" onclick="filterPage('home');return false" class="nav-filter-active" data-i18n="nav.home">Trang Chủ</a></li>
@@ -476,7 +485,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
   <a href="#" onclick="filterPage('home');closeMobileMenu();return false" data-filter="home">🏠 <span data-i18n="nav.home">Trang Chủ</span></a>
   <a href="#" onclick="filterPage('about');closeMobileMenu();return false" data-filter="about" data-i18n="nav.about">Về Chúng Tôi</a>
   <a href="#" onclick="filterPage('certificates');closeMobileMenu();return false" data-filter="certificates" data-i18n="nav.certificates">Chứng Chỉ</a>
-  <a href="#" onclick="filterPage('services');closeMobileMenu();return false" data-filter="services" data-i18n="nav.services">Dịch Vụ & Lộ Trình</a>
+  <a href="#" onclick="filterPage('services');closeMobileMenu();return false" data-filter="services" data-i18n="nav.services">Dịch Vụ</a>
   <a href="#" onclick="filterPage('ebook');closeMobileMenu();return false" data-filter="ebook">📚 Ebook</a>
   <a href="#" onclick="filterPage('students');closeMobileMenu();return false" data-filter="students" data-i18n="nav.students">Học Viên</a>
   <a href="#" onclick="filterPage('contact');closeMobileMenu();return false" data-filter="contact" data-i18n="nav.contact">Liên Hệ</a>
@@ -498,17 +507,17 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
         <a href="#services" class="btn-secondary" data-i18n="hero.btnSecondary">Xem Dịch Vụ</a>
       </div>
       <div class="hero-stats reveal delay-4">
-        <div class="stat"><div class="stat-num">500+</div><div class="stat-label" data-i18n="stat.students">Học Viên</div></div>
-        <div class="stat"><div class="stat-num">17×</div><div class="stat-label">Overalls</div></div>
-        <div class="stat"><div class="stat-num">30×</div><div class="stat-label">1st Place</div></div>
+        <div class="stat"><div class="stat-num" data-cms="students" data-suffix="+">500+</div><div class="stat-label" data-i18n="stat.students">Học Viên</div></div>
+        <div class="stat"><div class="stat-num" data-cms="overalls" data-suffix="×">17×</div><div class="stat-label">Overalls</div></div>
+        <div class="stat"><div class="stat-num" data-cms="first_place" data-suffix="×">30×</div><div class="stat-label">1st Place</div></div>
       </div>
     </div>
     <div class="hero-img-wrap">
-      <img id="heroCoach" src="assets/Đạt_kuma.png" alt="Đạt Kuma"
+      <img id="heroCoach" src="assets/coaches/Đạt_kuma.png" alt="Đạt Kuma"
         onerror="this.onerror=null;this.src='https://kumatraining.vn/wp-content/uploads/2026/02/Dat-Kuma-Founder_Prep-Coach.webp'"/>
       <div class="hero-coach-glow"></div>
       <div class="hero-logo-overlay">
-        <img src="assets/Logo_Kumacoach_2.png" alt="KumaCoach">
+        <img src="assets/logos/Logo_Kumacoach_2.png" alt="KumaCoach">
       </div>
     </div>
   </div>
@@ -522,25 +531,25 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
     <div class="achiev-grid">
       <div class="achiev-item reveal delay-1">
         <div class="achiev-icon">🏆</div>
-        <div class="achiev-num">17×</div>
+        <div class="achiev-num" data-cms="overalls" data-suffix="×">17×</div>
         <div class="achiev-label">Overalls</div>
         <div class="achiev-sub">Overall Champion</div>
       </div>
       <div class="achiev-item reveal delay-2">
         <div class="achiev-icon">🥇</div>
-        <div class="achiev-num">30×</div>
+        <div class="achiev-num" data-cms="first_place" data-suffix="×">30×</div>
         <div class="achiev-label">1st Place</div>
         <div class="achiev-sub">Competition Wins</div>
       </div>
       <div class="achiev-item reveal delay-3">
         <div class="achiev-icon">👤</div>
-        <div class="achiev-num">500+</div>
+        <div class="achiev-num" data-cms="students" data-suffix="+">500+</div>
         <div class="achiev-label" data-i18n="stat.students">Học Viên</div>
         <div class="achiev-sub" data-i18n="achiev.coached">Đã Huấn Luyện</div>
       </div>
       <div class="achiev-item reveal delay-4">
         <div class="achiev-icon">📅</div>
-        <div class="achiev-num">10+</div>
+        <div class="achiev-num" data-cms="years" data-suffix="+">10+</div>
         <div class="achiev-label" data-i18n="achiev.years">Năm</div>
         <div class="achiev-sub" data-i18n="achiev.experience">Kinh Nghiệm</div>
       </div>
@@ -552,7 +561,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 <section id="founder" data-nav="about">
   <div class="founder-img-wrap reveal-left">
     <div class="founder-frame">
-      <img src="assets/IFBB.png" alt="Team KumaCoach IFBB"
+      <img src="assets/logos/IFBB.png" alt="Team KumaCoach IFBB"
         style="max-height:420px;object-fit:cover;object-position:center top"
         onerror="this.onerror=null;this.src='https://kumatraining.vn/wp-content/uploads/2026/02/Dat-Kuma-Founder_Prep-Coach.webp'"/>
       <div class="founder-badge">
@@ -563,11 +572,11 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
     </div>
     <div class="founder-mini-grid reveal delay-1">
       <div class="founder-mini-photo">
-        <img src="assets/DSC00031.jpg" alt="Đạt Kuma coaching"
+        <img src="assets/coaches/DSC00031.jpg" alt="Đạt Kuma coaching"
           onerror="this.onerror=null;this.src='https://kumatraining.vn/wp-content/uploads/2026/02/Pham-Trong-Prep-Coach.webp'"/>
       </div>
       <div class="founder-mini-photo">
-        <img src="assets/DSC00133.jpg" alt="Đạt Kuma coaching"
+        <img src="assets/coaches/DSC00133.jpg" alt="Đạt Kuma coaching"
           onerror="this.onerror=null;this.src='https://kumatraining.vn/wp-content/uploads/2026/02/Jan-Operations-Manager-_Physique-Coach.webp'"/>
       </div>
     </div>
@@ -589,63 +598,63 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 <!-- CERTIFICATES -->
 <section id="certificates" data-nav="certificates" style="padding:60px 40px 80px">
   <div style="max-width:1200px;margin:0 auto">
-    <div class="section-tag reveal" style="justify-content:center;display:flex;align-items:center;gap:8px;margin-bottom:12px">Chứng Chỉ</div>
-    <h2 class="section-h2 reveal delay-1" style="text-align:center;margin-bottom:36px">CHỨNG CHỈ<br/>CHUYÊN MÔN</h2>
+    <div class="section-tag reveal" style="justify-content:center;display:flex;align-items:center;gap:8px;margin-bottom:12px" data-vi="Chứng Chỉ" data-en="Certificates">Chứng Chỉ</div>
+    <h2 class="section-h2 reveal delay-1" style="text-align:center;margin-bottom:36px" data-vi-html="CHỨNG CHỈ<br/>CHUYÊN MÔN" data-en-html="PROFESSIONAL<br/>CERTIFICATES">CHỨNG CHỈ<br/>CHUYÊN MÔN</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
       <div class="reveal delay-1" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/0c600dcf-bfe3-4f19-9d8b-64e29900def6.jpeg" style="width:100%;display:block" alt="ISSA Master Trainer">
+        <img src="assets/cer/0c600dcf-bfe3-4f19-9d8b-64e29900def6.jpeg" style="width:100%;display:block" alt="ISSA Master Trainer">
         <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">ISSA · MASTER TRAINER</div>
       </div>
       <div class="reveal delay-2" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/9b0e2923-cd4d-4ae8-9e86-8a11bdba3e43.jpeg" style="width:100%;display:block" alt="Poliquin Trainer">
+        <img src="assets/cer/9b0e2923-cd4d-4ae8-9e86-8a11bdba3e43.jpeg" style="width:100%;display:block" alt="Poliquin Trainer">
         <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">POLIQUIN · PERSONAL TRAINER LEVEL 1</div>
       </div>
       <div class="reveal delay-3" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/N1_Course_01_Progress_Dat_Pham.jpg" style="width:100%;display:block" alt="N1 Education">
+        <img src="assets/cer/N1_Course_01_Progress_Dat_Pham.jpg" style="width:100%;display:block" alt="N1 Education">
         <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">N1 EDUCATION · BIOMECHANICS & EXECUTION</div>
       </div>
       <div class="reveal delay-1" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/pham-Applied-Hypertrophy-Optimization-AHO-Certificate-J3-University.jpg" style="width:100%;display:block" alt="AHO Certificate">
+        <img src="assets/cer/pham-Applied-Hypertrophy-Optimization-AHO-Certificate-J3-University.jpg" style="width:100%;display:block" alt="AHO Certificate">
         <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">J3 UNIVERSITY · APPLIED HYPERTROPHY OPTIMIZATION</div>
       </div>
       <div class="reveal delay-2" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/pham-Female-Module-Female-Module-Certificate-J3-University.jpg" style="width:100%;display:block" alt="Female Module">
+        <img src="assets/cer/pham-Female-Module-Female-Module-Certificate-J3-University.jpg" style="width:100%;display:block" alt="Female Module">
         <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">J3 UNIVERSITY · FEMALE MODULE</div>
       </div>
       <div class="reveal delay-3" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/pham-J3U-Level-1-Certification-Course-Certificate-J3-University__1_.jpg" style="width:100%;display:block" alt="J3U Level 1">
+        <img src="assets/cer/pham-J3U-Level-1-Certification-Course-Certificate-J3-University__1_.jpg" style="width:100%;display:block" alt="J3U Level 1">
         <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">J3 UNIVERSITY · LEVEL 1 CERTIFICATION</div>
       </div>
       <div class="reveal delay-1" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/tải-xuống.jpg" style="width:100%;display:block" alt="Certificate">
-        <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">CHỨNG CHỈ CHUYÊN MÔN</div>
+        <img src="assets/cer/tải-xuống.jpg" style="width:100%;display:block" alt="Certificate">
+        <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px" data-vi="CHỨNG CHỈ CHUYÊN MÔN" data-en="PROFESSIONAL CERTIFICATE">CHỨNG CHỈ CHUYÊN MÔN</div>
       </div>
       <div class="reveal delay-2" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/ISSA-Bodybuilding-Specialist-Certification_2.jpg" style="width:100%;display:block" alt="ISSA Bodybuilding Specialist">
+        <img src="assets/cer/ISSA-Bodybuilding-Specialist-Certification_2.jpg" style="width:100%;display:block" alt="ISSA Bodybuilding Specialist">
         <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">ISSA · SPECIALIST IN BODYBUILDING</div>
       </div>
       <div class="reveal delay-3" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/ISSA-Certified-Personal-Trainer-Certification_1.jpg" style="width:100%;display:block" alt="ISSA Certified Personal Trainer">
+        <img src="assets/cer/ISSA-Certified-Personal-Trainer-Certification_1.jpg" style="width:100%;display:block" alt="ISSA Certified Personal Trainer">
         <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">ISSA · CERTIFIED PERSONAL TRAINER</div>
       </div>
       <div class="reveal delay-1" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/ISSA-DNA-Based-Fitness-Coach-Certification_3.jpg" style="width:100%;display:block" alt="ISSA DNA Based Fitness Coach">
+        <img src="assets/cer/ISSA-DNA-Based-Fitness-Coach-Certification_3.jpg" style="width:100%;display:block" alt="ISSA DNA Based Fitness Coach">
         <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">ISSA · DNA-BASED FITNESS COACH</div>
       </div>
       <div class="reveal delay-2" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/ISSA-Nutritionist-Certification_3.jpg" style="width:100%;display:block" alt="ISSA Nutritionist">
+        <img src="assets/cer/ISSA-Nutritionist-Certification_3.jpg" style="width:100%;display:block" alt="ISSA Nutritionist">
         <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">ISSA · NUTRITIONIST CERTIFICATION</div>
       </div>
       <div class="reveal delay-3" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/ISSA-Online-Coaching-Certification-Certification_1.jpg" style="width:100%;display:block" alt="ISSA Online Coaching">
+        <img src="assets/cer/ISSA-Online-Coaching-Certification-Certification_1.jpg" style="width:100%;display:block" alt="ISSA Online Coaching">
         <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">ISSA · ONLINE COACHING CERTIFICATION</div>
       </div>
       <div class="reveal delay-1" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/ISSA-Sports-Nutritionist-Certification_1.jpg" style="width:100%;display:block" alt="ISSA Sports Nutritionist">
+        <img src="assets/cer/ISSA-Sports-Nutritionist-Certification_1.jpg" style="width:100%;display:block" alt="ISSA Sports Nutritionist">
         <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">ISSA · SPORTS NUTRITIONIST</div>
       </div>
       <div class="reveal delay-2" style="border-radius:12px;overflow:hidden;border:1px solid #222;background:#0d0d0d;transition:transform .3s" onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
-        <img src="assets/ISSA_Elite_Trainer_Achievement.jpg" style="width:100%;display:block" alt="ISSA Elite Trainer">
+        <img src="assets/cer/ISSA_Elite_Trainer_Achievement.jpg" style="width:100%;display:block" alt="ISSA Elite Trainer">
         <div style="padding:12px 14px;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.5px">ISSA · ELITE TRAINER ACHIEVEMENT</div>
       </div>
     </div>
@@ -675,18 +684,18 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
         <div class="svc-tier">
           <div class="svc-tier-label">3 THÁNG</div>
           <div class="svc-tier-duration">12 tuần</div>
-          <div class="svc-tier-amount">7.000.000₫</div>
+          <div class="svc-tier-amount">7.000.000 vnđ</div>
         </div>
         <div class="svc-tier best">
           <div class="svc-tier-label best-badge">6 THÁNG</div>
           <div class="svc-tier-duration">24 tuần + tặng 4 tuần</div>
-          <div class="svc-tier-amount">14.000.000₫</div>
+          <div class="svc-tier-amount">14.000.000 vnđ</div>
           <div class="svc-tier-note">Ưu đãi so với gói ngắn hạn</div>
         </div>
         <div class="svc-tier">
           <div class="svc-tier-label">12 THÁNG</div>
           <div class="svc-tier-duration">48 tuần + 4 tuần</div>
-          <div class="svc-tier-amount">22.000.000₫</div>
+          <div class="svc-tier-amount">22.000.000 vnđ</div>
           <div class="svc-tier-note">+ 02 session 1:1 Online · 60 phút/session</div>
         </div>
       </div>
@@ -696,18 +705,18 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
         <div class="svc-tier">
           <div class="svc-tier-label">3 THÁNG</div>
           <div class="svc-tier-duration">12 tuần</div>
-          <div class="svc-tier-amount">10.000.000₫</div>
+          <div class="svc-tier-amount">10.000.000 vnđ</div>
         </div>
         <div class="svc-tier best">
           <div class="svc-tier-label best-badge">6 THÁNG</div>
           <div class="svc-tier-duration">24 tuần + tặng 4 tuần</div>
-          <div class="svc-tier-amount">18.000.000₫</div>
+          <div class="svc-tier-amount">18.000.000 vnđ</div>
           <div class="svc-tier-note">Ưu đãi so với gói ngắn hạn</div>
         </div>
         <div class="svc-tier">
           <div class="svc-tier-label">12 THÁNG</div>
           <div class="svc-tier-duration">48 tuần + 4 tuần</div>
-          <div class="svc-tier-amount">38.000.000₫</div>
+          <div class="svc-tier-amount">38.000.000 vnđ</div>
           <div class="svc-tier-note">+ 02 session Call Online Training 1:1 · 60 phút/session</div>
         </div>
       </div>
@@ -724,18 +733,18 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
         <div class="svc-tier">
           <div class="svc-tier-label">GÓI 3 THÁNG</div>
           <div class="svc-tier-duration">12 tuần</div>
-          <div class="svc-tier-amount">5.000.000₫</div>
+          <div class="svc-tier-amount">5.000.000 vnđ</div>
         </div>
         <div class="svc-tier best">
           <div class="svc-tier-label best-badge">GÓI 6 THÁNG</div>
           <div class="svc-tier-duration">24 tuần + tặng 4 tuần</div>
-          <div class="svc-tier-amount">10.000.000₫</div>
+          <div class="svc-tier-amount">10.000.000 vnđ</div>
           <div class="svc-tier-note">Ưu đãi so với gói ngắn hạn</div>
         </div>
         <div class="svc-tier">
           <div class="svc-tier-label">GÓI 12 THÁNG</div>
           <div class="svc-tier-duration">48 tuần + 4 tuần</div>
-          <div class="svc-tier-amount">20.000.000₫</div>
+          <div class="svc-tier-amount">20.000.000 vnđ</div>
           <div class="svc-tier-note">+ 02 session 1:1 Online · 60 phút/session</div>
         </div>
       </div>
@@ -744,25 +753,25 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
     <!-- Lifestyle với 3 gói -->
     <div class="svc-card reveal delay-4" style="grid-column:span 2">
       <div class="svc-icon">🌱</div>
-      <div class="svc-title">Lifestyle Coaching <span style="font-size:12px;color:#666;font-weight:400">· Mùa Cải Thiện OFFSEASON Natural</span></div>
+      <div class="svc-title">Lifestyle Coaching <span style="font-size:12px;color:#666;font-weight:400" data-vi="· Mùa Cải Thiện OFFSEASON Natural" data-en="· OFFSEASON Physique Improvement">· Mùa Cải Thiện OFFSEASON Natural</span></div>
       <p class="svc-desc" style="margin-bottom:12px" data-i18n="svc4.desc">Không thi đấu — cải thiện hình thể & lối sống bền vững. Bao gồm plan dinh dưỡng cá thể hoá, plan training chi tiết, check-in 1 lần/tuần, hỏi đáp chuyên môn & check form qua video.</p>
       <hr class="svc-divider">
       <div class="svc-tier-grid">
         <div class="svc-tier">
           <div class="svc-tier-label">GÓI 3 THÁNG</div>
           <div class="svc-tier-duration">12 tuần</div>
-          <div class="svc-tier-amount">5.000.000₫</div>
+          <div class="svc-tier-amount">5.000.000 vnđ</div>
         </div>
         <div class="svc-tier best">
           <div class="svc-tier-label best-badge">GÓI 6 THÁNG</div>
           <div class="svc-tier-duration">24 tuần + tặng 4 tuần</div>
-          <div class="svc-tier-amount">10.000.000₫</div>
+          <div class="svc-tier-amount">10.000.000 vnđ</div>
           <div class="svc-tier-note">Ưu đãi so với gói ngắn hạn</div>
         </div>
         <div class="svc-tier">
           <div class="svc-tier-label">GÓI 12 THÁNG</div>
           <div class="svc-tier-duration">48 tuần + 4 tuần</div>
-          <div class="svc-tier-amount">20.000.000₫</div>
+          <div class="svc-tier-amount">20.000.000 vnđ</div>
           <div class="svc-tier-note">+ 02 session 1:1 Online · 60 phút/session</div>
         </div>
       </div>
@@ -774,47 +783,47 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
         <div class="svc-icon" style="margin-bottom:0">💪</div>
         <div class="svc-title" style="margin-bottom:0">Basic Coaching</div>
       </div>
-      <p class="svc-desc" style="margin-bottom:12px">Lộ trình cá nhân hoá dành riêng cho bạn — giáo án tập luyện, dinh dưỡng, check-in định kỳ & hỗ trợ chuyên môn xuyên suốt hành trình.</p>
+      <p class="svc-desc" style="margin-bottom:12px" data-vi="Lộ trình cá nhân hoá dành riêng cho bạn — giáo án tập luyện, dinh dưỡng, check-in định kỳ & hỗ trợ chuyên môn xuyên suốt hành trình." data-en="A personalized roadmap designed for you — training program, nutrition, periodic check-ins & expert support throughout your journey.">Lộ trình cá nhân hoá dành riêng cho bạn — giáo án tập luyện, dinh dưỡng, check-in định kỳ & hỗ trợ chuyên môn xuyên suốt hành trình.</p>
       <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">
-        <span style="background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.25);border-radius:6px;padding:5px 12px;font-size:12px;color:#ccc">📅 Check-in 1 lần / 3 tuần</span>
-        <span style="background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.25);border-radius:6px;padding:5px 12px;font-size:12px;color:#ccc">⚠️ Không bao gồm chỉnh sửa kỹ thuật tập online</span>
-        <span style="background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.25);border-radius:6px;padding:5px 12px;font-size:12px;color:#ccc">✅ Dành cho người đã biết tập</span>
+        <span style="background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.25);border-radius:6px;padding:5px 12px;font-size:12px;color:#ccc" data-vi="📅 Check-in 1 lần / 3 tuần" data-en="📅 Check-in once every 3 weeks">📅 Check-in 1 lần / 3 tuần</span>
+        <span style="background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.25);border-radius:6px;padding:5px 12px;font-size:12px;color:#ccc" data-vi="⚠️ Không bao gồm chỉnh sửa kỹ thuật tập online" data-en="⚠️ Does not include online technique correction">⚠️ Không bao gồm chỉnh sửa kỹ thuật tập online</span>
+        <span style="background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.25);border-radius:6px;padding:5px 12px;font-size:12px;color:#ccc" data-vi="✅ Dành cho người đã biết tập" data-en="✅ For those who already know how to train">✅ Dành cho người đã biết tập</span>
       </div>
       <hr class="svc-divider" style="margin-top:0">
       <div class="svc-tier-grid">
         <div class="svc-tier">
           <div class="svc-tier-label">GÓI 3 THÁNG</div>
           <div class="svc-tier-duration">12 tuần</div>
-          <div class="svc-tier-amount">3.000.000₫</div>
+          <div class="svc-tier-amount">3.000.000 vnđ</div>
         </div>
         <div class="svc-tier best">
           <div class="svc-tier-label best-badge">GÓI 6 THÁNG</div>
           <div class="svc-tier-duration">24 tuần + tặng 4 tuần</div>
-          <div class="svc-tier-amount">6.000.000₫</div>
+          <div class="svc-tier-amount">6.000.000 vnđ</div>
           <div class="svc-tier-note">Ưu đãi so với gói ngắn hạn</div>
         </div>
         <div class="svc-tier">
           <div class="svc-tier-label">GÓI 12 THÁNG</div>
           <div class="svc-tier-duration">48 tuần + tặng 4 tuần</div>
-          <div class="svc-tier-amount">12.000.000₫</div>
+          <div class="svc-tier-amount">12.000.000 vnđ</div>
           <div class="svc-tier-note">+ 02 session Call Online Live Coaching · 60 phút/session</div>
         </div>
       </div>
-      <a href="https://www.messenger.com/t/ThanhDatPham281?text=Ch%C3%A0o%20b%E1%BA%A1n%2C%20t%C3%B4i%20mu%E1%BB%91n%20t%C3%ACm%20hi%E1%BB%83u%20v%E1%BB%81%20Basic%20Coaching%20c%E1%BB%A7a%20KumaCoach" target="_blank" rel="noopener" class="svc-link" style="margin-top:24px;display:inline-flex">Đăng Ký →</a>
+      <a href="https://www.messenger.com/t/ThanhDatPham281?text=Ch%C3%A0o%20b%E1%BA%A1n%2C%20t%C3%B4i%20mu%E1%BB%91n%20t%C3%ACm%20hi%E1%BB%83u%20v%E1%BB%81%20Basic%20Coaching%20c%E1%BB%A7a%20KumaCoach" target="_blank" rel="noopener" class="svc-link" style="margin-top:24px;display:inline-flex" data-i18n="svc.link">Đăng Ký →</a>
     </div>
     <!-- Peak Week + Dịch vụ lẻ -->
     <div class="svc-card reveal delay-2">
       <div class="svc-icon">⏱️</div>
       <div class="svc-title">Peak Week</div>
-      <p class="svc-desc">Enhanced · Natural — chuẩn bị đỉnh cao trong 1 tuần trước ngày thi.</p>
-      <div class="svc-price">1.000.000₫</div>
-      <div style="font-size:12px;color:#555;margin-bottom:24px">1 tuần trước thi đấu</div>
+      <p class="svc-desc" data-vi="Enhanced · Natural — chuẩn bị đỉnh cao trong 1 tuần trước ngày thi." data-en="Enhanced · Natural — peak preparation in the final week before competition.">Enhanced · Natural — chuẩn bị đỉnh cao trong 1 tuần trước ngày thi.</p>
+      <div class="svc-price">1.000.000 vnđ</div>
+      <div style="font-size:12px;color:#555;margin-bottom:24px" data-vi="1 tuần trước thi đấu" data-en="1 week before competition">1 tuần trước thi đấu</div>
       <hr class="svc-divider" style="margin-top:0">
       <div class="svc-icon" style="font-size:24px;margin-bottom:10px">📞</div>
-      <div style="font-weight:700;font-size:14px;margin-bottom:6px">Dịch Vụ Lẻ</div>
-      <div style="color:#888;font-size:13px;margin-bottom:16px">01 Session Call Online 1:1 · 60 phút</div>
-      <div class="svc-price" style="margin-bottom:0">1.000.000₫</div>
-      <a href="https://www.messenger.com/t/ThanhDatPham281?text=Ch%C3%A0o%20b%E1%BA%A1n%2C%20t%C3%B4i%20mu%E1%BB%91n%20%C4%91%E1%BA%B7t%20Peak%20Week%20ho%E1%BA%B7c%20Session%201%3A1" target="_blank" rel="noopener" class="svc-link" style="margin-top:20px;display:inline-flex">Đặt Lịch →</a>
+      <div style="font-weight:700;font-size:14px;margin-bottom:6px" data-vi="Dịch Vụ Lẻ" data-en="Add-On Service">Dịch Vụ Lẻ</div>
+      <div style="color:#888;font-size:13px;margin-bottom:16px" data-vi="01 Session Call Online 1:1 · 60 phút" data-en="01 Session Call Online 1:1 · 60 min">01 Session Call Online 1:1 · 60 phút</div>
+      <div class="svc-price" style="margin-bottom:0">1.000.000 vnđ</div>
+      <a href="https://www.messenger.com/t/ThanhDatPham281?text=Ch%C3%A0o%20b%E1%BA%A1n%2C%20t%C3%B4i%20mu%E1%BB%91n%20%C4%91%E1%BA%B7t%20Peak%20Week%20ho%E1%BA%B7c%20Session%201%3A1" target="_blank" rel="noopener" class="svc-link" style="margin-top:20px;display:inline-flex" data-vi="Đặt Lịch →" data-en="Book Now →">Đặt Lịch →</a>
     </div>
     <!-- Gói Lord Coaching TQ - chiếm full width -->
     <div class="svc-card svc-card-premium reveal delay-1" style="grid-column:1/-1">
@@ -822,9 +831,9 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
         <div class="svc-icon" style="margin-bottom:0">🇨🇳</div>
         <div class="svc-title" style="margin-bottom:0">🔱 TEAM LORD COACHING 🇨🇳 × KUMA COACH VN 🇻🇳</div>
       </div>
-      <div class="svc-price">60.000.000đ / 1 năm</div>
+      <div class="svc-price" data-i18n="svc6.price">60.000.000 vnđ / 1 năm</div>
       <p class="svc-desc" style="max-width:760px" data-i18n-html="svc6.desc">Chương trình cao cấp dành cho VĐV nghiêm túc — hợp tác trực tiếp cùng Team Lord Coaching (Trung Quốc), đội ngũ đã tạo ra hơn <b style="color:#ccc">40+ IFBB PRO CARD</b> trên toàn thế giới. Được coach trực tiếp bởi các PRO COACH của team, theo dõi & điều chỉnh liên tục suốt cả năm.</p>
-      <ul class="svc-features" style="columns:2;column-gap:60px;margin-bottom:0">
+      <ul class="svc-features" style="columns:2;column-gap:60px;margin-bottom:0" data-i18n-html="svc6.features">
         <li>Dinh dưỡng theo từng giai đoạn</li>
         <li>Được Team Lord trực tiếp prep</li>
         <li>Hướng dẫn kỹ thuật tập luyện chuyên sâu</li>
@@ -839,7 +848,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
         <div class="lord-photo-card" style="height:300px;border-radius:14px;overflow:hidden;border:1px solid #2a2a2a;position:relative;background:#0c0c0c;transform:rotateY(4deg) rotateX(2deg);transition:transform .4s ease;box-shadow:-8px 12px 40px rgba(0,0,0,.6)"
              onmouseenter="this.style.transform='rotateY(0deg) rotateX(0deg) scale(1.02)'"
              onmouseleave="this.style.transform='rotateY(4deg) rotateX(2deg)'">
-          <img src="assets/1389c2a2-8319-4f61-83c9-1bdb388918ed.jpeg"
+          <img src="assets/coaches/1389c2a2-8319-4f61-83c9-1bdb388918ed.jpeg"
                style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;padding:8px;box-sizing:border-box"
                onerror="this.style.display='none'">
           <div style="position:absolute;top:12px;left:12px;background:rgba(0,0,0,.7);border:1px solid rgba(212,160,23,.3);border-radius:6px;padding:5px 10px;font-size:10px;font-weight:800;letter-spacing:2px;color:var(--gold)">🔱 TEAM LORD · 🇨🇳</div>
@@ -848,7 +857,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
         <div class="lord-photo-card" style="height:300px;border-radius:14px;overflow:hidden;border:1px solid rgba(212,160,23,.25);position:relative;transform:rotateY(0deg) rotateX(2deg);transition:transform .4s ease;box-shadow:0 12px 40px rgba(0,0,0,.6)"
              onmouseenter="this.style.transform='rotateY(0deg) rotateX(0deg) scale(1.02)'"
              onmouseleave="this.style.transform='rotateY(0deg) rotateX(2deg)'">
-          <img src="assets/Đạt_kuma.png"
+          <img src="assets/coaches/Đạt_kuma.png"
                style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;padding:12px;box-sizing:border-box"
                alt="Đạt Kuma">
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 50%)"></div>
@@ -862,7 +871,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
         <div class="lord-photo-card" style="height:300px;border-radius:14px;overflow:hidden;border:1px solid rgba(212,160,23,.25);position:relative;transform:rotateY(-4deg) rotateX(2deg);transition:transform .4s ease;box-shadow:8px 12px 40px rgba(0,0,0,.6)"
              onmouseenter="this.style.transform='rotateY(0deg) rotateX(0deg) scale(1.02)'"
              onmouseleave="this.style.transform='rotateY(-4deg) rotateX(2deg)'">
-          <img src="assets/Ảnh_màn_hình_2026-06-25_lúc_13.38.19.png"
+          <img src="assets/coaches/Ảnh_màn_hình_2026-06-25_lúc_13.38.19.png"
                style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block"
                alt="Team Lord Vietnam">
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 50%)"></div>
@@ -886,7 +895,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
           <div class="lord-coach-avatar" style="background:rgba(212,160,23,.2);color:var(--gold)">🔱</div>
           <div class="lord-coach-name">ĐẠT KUMA 🇻🇳</div>
           <div class="lord-coach-role">HEAD COACH · KUMA COACH VN</div>
-          <div class="lord-coach-stat"><b>17× OVERALL CHAMPION</b><br>10+ năm kinh nghiệm<br><span style="color:#555">IFBB Prep Specialist</span></div>
+          <div class="lord-coach-stat"><b>17× OVERALL CHAMPION</b><br><span data-vi="10+ năm kinh nghiệm" data-en="10+ years experience">10+ năm kinh nghiệm</span><br><span style="color:#555">IFBB Prep Specialist</span></div>
         </div>
         <div class="lord-coach">
           <div class="lord-coach-avatar">🔱</div>
@@ -897,7 +906,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
       </div>
 
       <div style="margin-top:24px">
-        <a href="https://www.messenger.com/t/ThanhDatPham281?text=Ch%C3%A0o%20b%E1%BA%A1n%2C%20t%C3%B4i%20mu%E1%BB%91n%20t%C3%ACm%20hi%E1%BB%83u%20v%E1%BB%81%20G%C3%B3i%20Lord%20Coaching%2060tr" target="_blank" rel="noopener" class="svc-link">Đăng Ký Ngay →</a>
+        <a href="https://www.messenger.com/t/ThanhDatPham281?text=Ch%C3%A0o%20b%E1%BA%A1n%2C%20t%C3%B4i%20mu%E1%BB%91n%20t%C3%ACm%20hi%E1%BB%83u%20v%E1%BB%81%20G%C3%B3i%20Lord%20Coaching%2060tr" target="_blank" rel="noopener" class="svc-link" data-i18n="nav.registerArrow">Đăng Ký Ngay →</a>
       </div>
     </div>
   </div>
@@ -912,31 +921,31 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
     <p class="section-body reveal delay-2" style="max-width:520px;margin:0 auto" data-i18n="ebook.body">Hệ thống giáo án được thiết kế bởi Đạt Kuma — khoa học, thực chiến, áp dụng ngay.</p>
   </div>
   <div class="ebook-grid">
-    <div class="ebook-card reveal delay-1" data-id="1" data-title="The Model Elevate Program" data-price="1000000" data-form-value="The Model Elevate program. KUMATRAINING" data-img="assets/The_Model_Elevate_program._KUMATRAINING.png">
+    <div class="ebook-card reveal delay-1" data-id="1" data-title="The Model Elevate Program" data-price="1000000" data-form-value="The Model Elevate program. KUMATRAINING" data-img="assets/ebooks/The_Model_Elevate_program._KUMATRAINING.png">
       <div class="ebook-cover-wrap">
-        <img class="ebook-cover" src="assets/The_Model_Elevate_program._KUMATRAINING.png" alt="The Model Elevate Program">
+        <img class="ebook-cover" src="assets/ebooks/The_Model_Elevate_program._KUMATRAINING.png" alt="The Model Elevate Program">
         <div class="ebook-badge">Bestseller</div>
       </div>
       <div class="ebook-info">
         <div class="ebook-title">The Model Elevate Program · Kuma Training</div>
-        <ul class="ebook-desc">
+        <ul class="ebook-desc" data-i18n-html="ebook1.desc">
           <li>Ghi nhận sự thay đổi cơ thể qua quá trình tập</li>
           <li>Chương trình tập luyện cụ thể, hướng dẫn rõ ràng</li>
           <li>Kiến thức cơ bản về các nhóm cơ</li>
           <li>Hướng dẫn áp dụng chương trình hiệu quả</li>
           <li>Giải đáp câu hỏi thường gặp</li>
         </ul>
-        <div class="ebook-price">1.000.000 ₫</div>
+        <div class="ebook-price">1.000.000 vnđ</div>
         <button class="ebook-add-btn" onclick="addToCart(this)" data-i18n="ebook.addBtn">+ Thêm vào giỏ</button>
       </div>
     </div>
-    <div class="ebook-card reveal delay-2" data-id="2" data-title="The Men's Physique Training Method" data-price="1080000" data-form-value="The Men's Physique Training Method" data-img="assets/The_Mens_Physique_Training_Method.png">
+    <div class="ebook-card reveal delay-2" data-id="2" data-title="The Men's Physique Training Method" data-price="1080000" data-form-value="The Men's Physique Training Method" data-img="assets/ebooks/The_Mens_Physique_Training_Method.png">
       <div class="ebook-cover-wrap">
-        <img class="ebook-cover" src="assets/The_Mens_Physique_Training_Method.png" alt="The Men's Physique Training Method">
+        <img class="ebook-cover" src="assets/ebooks/The_Mens_Physique_Training_Method.png" alt="The Men's Physique Training Method">
       </div>
       <div class="ebook-info">
         <div class="ebook-title">The Men's Physique Training Method · Kuma Training</div>
-        <ul class="ebook-desc">
+        <ul class="ebook-desc" data-i18n-html="ebook2.desc">
           <li>5 nguyên tắc cơ bản trong bodybuilding</li>
           <li>Cách theo dõi tiến độ tập luyện</li>
           <li>Giáo án tập luyện rõ ràng, dễ áp dụng</li>
@@ -944,17 +953,17 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
           <li>Hướng dẫn sử dụng program hiệu quả</li>
           <li>Giải đáp câu hỏi thường gặp</li>
         </ul>
-        <div class="ebook-price">1.080.000 ₫</div>
+        <div class="ebook-price">1.080.000 vnđ</div>
         <button class="ebook-add-btn" onclick="addToCart(this)" data-i18n="ebook.addBtn">+ Thêm vào giỏ</button>
       </div>
     </div>
-    <div class="ebook-card reveal delay-3" data-id="3" data-title="The Bikini Heaven" data-price="990000" data-form-value="THE BIKINI HEAVEN. KUMATRAINING" data-img="assets/THE_BIKINI_HEAVEN_cover.png">
+    <div class="ebook-card reveal delay-3" data-id="3" data-title="The Bikini Heaven" data-price="990000" data-form-value="THE BIKINI HEAVEN. KUMATRAINING" data-img="assets/ebooks/THE_BIKINI_HEAVEN_cover.png">
       <div class="ebook-cover-wrap">
-        <img class="ebook-cover" src="assets/THE_BIKINI_HEAVEN_cover.png" alt="The Bikini Heaven">
+        <img class="ebook-cover" src="assets/ebooks/THE_BIKINI_HEAVEN_cover.png" alt="The Bikini Heaven">
       </div>
       <div class="ebook-info">
         <div class="ebook-title">The Bikini Heaven · Kuma Training</div>
-        <ul class="ebook-desc">
+        <ul class="ebook-desc" data-i18n-html="ebook3.desc">
           <li>5 nguyên tắc cơ bản trong bodybuilding</li>
           <li>Cách theo dõi tiến độ</li>
           <li>Giáo án tập luyện (Program)</li>
@@ -962,17 +971,17 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
           <li>Hướng dẫn sử dụng giáo án</li>
           <li>Giải đáp câu hỏi thường gặp</li>
         </ul>
-        <div class="ebook-price">990.000 ₫</div>
+        <div class="ebook-price">990.000 vnđ</div>
         <button class="ebook-add-btn" onclick="addToCart(this)" data-i18n="ebook.addBtn">+ Thêm vào giỏ</button>
       </div>
     </div>
-    <div class="ebook-card reveal delay-1" data-id="4" data-title="The Wellness Blueprint" data-price="690000" data-form-value="THE WELLNESS BLUEPRINT. KUMATRAINING" data-img="assets/THE_WELLNESS_BLUEPRINT_cover.png">
+    <div class="ebook-card reveal delay-1" data-id="4" data-title="The Wellness Blueprint" data-price="690000" data-form-value="THE WELLNESS BLUEPRINT. KUMATRAINING" data-img="assets/ebooks/THE_WELLNESS_BLUEPRINT_cover.png">
       <div class="ebook-cover-wrap">
-        <img class="ebook-cover" src="assets/THE_WELLNESS_BLUEPRINT_cover.png" alt="The Wellness Blueprint">
+        <img class="ebook-cover" src="assets/ebooks/THE_WELLNESS_BLUEPRINT_cover.png" alt="The Wellness Blueprint">
       </div>
       <div class="ebook-info">
         <div class="ebook-title">The Wellness Blueprint · Kumatraining</div>
-        <ul class="ebook-desc">
+        <ul class="ebook-desc" data-i18n-html="ebook4.desc">
           <li>Kiến thức nền tảng về sức khoẻ & bodybuilding</li>
           <li>Dinh dưỡng & lối sống lành mạnh</li>
           <li>Chương trình tập luyện cho người mới bắt đầu</li>
@@ -980,18 +989,18 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
           <li>Kiến thức giải phẫu cơ bản</li>
           <li>Giải đáp câu hỏi thường gặp</li>
         </ul>
-        <div class="ebook-price">690.000 ₫</div>
+        <div class="ebook-price">690.000 vnđ</div>
         <button class="ebook-add-btn" onclick="addToCart(this)" data-i18n="ebook.addBtn">+ Thêm vào giỏ</button>
       </div>
     </div>
-    <div class="ebook-card reveal delay-2" data-id="5" data-title="The Classic Aesthetics Program" data-price="1200000" data-form-value="THE CLASSIC AESTHETICS PROGRAM. KUMATRAINING" data-img="assets/THE_CLASSIC_AESTHETICS_PROGRAM._KUMATRAINING.png">
+    <div class="ebook-card reveal delay-2" data-id="5" data-title="The Classic Aesthetics Program" data-price="1200000" data-form-value="THE CLASSIC AESTHETICS PROGRAM. KUMATRAINING" data-img="assets/ebooks/THE_CLASSIC_AESTHETICS_PROGRAM._KUMATRAINING.png">
       <div class="ebook-cover-wrap">
-        <img class="ebook-cover" src="assets/THE_CLASSIC_AESTHETICS_PROGRAM._KUMATRAINING.png" alt="The Classic Aesthetics Program">
+        <img class="ebook-cover" src="assets/ebooks/THE_CLASSIC_AESTHETICS_PROGRAM._KUMATRAINING.png" alt="The Classic Aesthetics Program">
         <div class="ebook-badge">Premium</div>
       </div>
       <div class="ebook-info">
         <div class="ebook-title">The Classic Aesthetics Program · Kuma Training</div>
-        <ul class="ebook-desc">
+        <ul class="ebook-desc" data-i18n-html="ebook5.desc">
           <li>5 nguyên tắc cơ bản trong bodybuilding</li>
           <li>Theo dõi tiến độ</li>
           <li>Chương trình tập luyện (Program)</li>
@@ -999,18 +1008,18 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
           <li>Cách sử dụng chương trình</li>
           <li>Câu hỏi thường gặp</li>
         </ul>
-        <div class="ebook-price">1.200.000 ₫</div>
+        <div class="ebook-price">1.200.000 vnđ</div>
         <button class="ebook-add-btn" onclick="addToCart(this)" data-i18n="ebook.addBtn">+ Thêm vào giỏ</button>
       </div>
     </div>
-    <div class="ebook-card reveal delay-3" data-id="6" data-title="A Science-Based Guide to Building Muscle" data-price="990000" data-form-value="A science-based guide to building muscle . KUMATRAINING" data-img="assets/A_science-based_guide_to_building_muscle._KUMATRAINING.png">
+    <div class="ebook-card reveal delay-3" data-id="6" data-title="A Science-Based Guide to Building Muscle" data-price="990000" data-form-value="A science-based guide to building muscle . KUMATRAINING" data-img="assets/ebooks/A_science-based_guide_to_building_muscle._KUMATRAINING.png">
       <div class="ebook-cover-wrap">
-        <img class="ebook-cover" src="assets/A_science-based_guide_to_building_muscle._KUMATRAINING.png" alt="A Science-Based Guide to Building Muscle">
+        <img class="ebook-cover" src="assets/ebooks/A_science-based_guide_to_building_muscle._KUMATRAINING.png" alt="A Science-Based Guide to Building Muscle">
         <div class="ebook-badge">Science</div>
       </div>
       <div class="ebook-info">
         <div class="ebook-title">A Science-Based Guide to Building Muscle · Kumatraining</div>
-        <ul class="ebook-desc">
+        <ul class="ebook-desc" data-i18n-html="ebook6.desc">
           <li>5 Nguyên tắc cơ bản trong Bodybuilding</li>
           <li>Theo dõi tiến độ</li>
           <li>Anatomy căn bản</li>
@@ -1018,7 +1027,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
           <li>Cách sử dụng Program</li>
           <li>Câu hỏi</li>
         </ul>
-        <div class="ebook-price">990.000 ₫</div>
+        <div class="ebook-price">990.000 vnđ</div>
         <button class="ebook-add-btn" onclick="addToCart(this)" data-i18n="ebook.addBtn">+ Thêm vào giỏ</button>
       </div>
     </div>
@@ -1195,7 +1204,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 
       <!-- Ảnh 1: Global Classic bodybuilding group — wide, top left -->
       <div class="reveal delay-1" style="grid-column:span 7;grid-row:span 1;border-radius:14px;overflow:hidden;position:relative;background:#111;min-height:340px">
-        <img src="assets/700253367_1598446858956052_1129105461696119902_n.jpg"
+        <img src="assets/athletes/700253367_1598446858956052_1129105461696119902_n.jpg"
              style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s"
              alt="Học viên KumaCoach thi đấu Global Classic Bodybuilding Vietnam"
              onmouseenter="this.style.transform='scale(1.04)'" onmouseleave="this.style.transform='scale(1)'">
@@ -1206,7 +1215,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 
       <!-- Ảnh 2: Bikini với huy chương — portrait, top right -->
       <div class="reveal delay-2" style="grid-column:span 5;grid-row:span 1;border-radius:14px;overflow:hidden;position:relative;background:#111;min-height:340px">
-        <img src="assets/700266986_1598281122305959_130150509349725713_n.jpg"
+        <img src="assets/athletes/700266986_1598281122305959_130150509349725713_n.jpg"
              style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s"
              alt="Học viên KumaCoach hạng Bikini Global Classic Vietnam huy chương"
              onmouseenter="this.style.transform='scale(1.04)'" onmouseleave="this.style.transform='scale(1)'">
@@ -1217,7 +1226,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 
       <!-- Ảnh 3: Figure athlete trophy — portrait -->
       <div class="reveal delay-1" style="grid-column:span 4;grid-row:span 1;border-radius:14px;overflow:hidden;position:relative;background:#111;min-height:360px">
-        <img src="assets/700445872_4426879554215145_7466397627098619999_n.jpg"
+        <img src="assets/athletes/700445872_4426879554215145_7466397627098619999_n.jpg"
              style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s"
              alt="Học viên KumaCoach vô địch hạng Figure cup vàng"
              onmouseenter="this.style.transform='scale(1.04)'" onmouseleave="this.style.transform='scale(1)'">
@@ -1228,7 +1237,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 
       <!-- Ảnh 4: Bikini 4 góc độ -->
       <div class="reveal delay-2" style="grid-column:span 4;grid-row:span 1;border-radius:14px;overflow:hidden;position:relative;background:#111;min-height:360px">
-        <img src="assets/706991167_1605228444944560_619943650739209208_n.jpg"
+        <img src="assets/athletes/706991167_1605228444944560_619943650739209208_n.jpg"
              style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .5s"
              alt="Học viên KumaCoach Bikini Wellness huy chương bạc"
              onmouseenter="this.style.transform='scale(1.04)'" onmouseleave="this.style.transform='scale(1)'">
@@ -1239,7 +1248,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 
       <!-- Ảnh 5: NPC Worldwide nam physique -->
       <div class="reveal delay-3" style="grid-column:span 4;grid-row:span 1;border-radius:14px;overflow:hidden;position:relative;background:#111;min-height:360px">
-        <img src="assets/728093498_17994448046993676_454867307270717180_n.jpg"
+        <img src="assets/athletes/728093498_17994448046993676_454867307270717180_n.jpg"
              style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s"
              alt="Học viên KumaCoach NPC Worldwide Pro Qualifier Classic Physique"
              onmouseenter="this.style.transform='scale(1.04)'" onmouseleave="this.style.transform='scale(1)'">
@@ -1250,7 +1259,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 
       <!-- Ảnh 6: Overall winner Fit Model — full width bottom -->
       <div class="reveal delay-2" style="grid-column:span 12;border-radius:14px;overflow:hidden;position:relative;background:#111;min-height:380px">
-        <img src="assets/730222644_17994773855993676_6572959956396850313_n.jpg"
+        <img src="assets/athletes/730222644_17994773855993676_6572959956396850313_n.jpg"
              style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;transition:transform .5s"
              alt="Học viên KumaCoach Overall Winner Fit Model NPC Worldwide Global Classic Vietnam 2026"
              onmouseenter="this.style.transform='scale(1.02)'" onmouseleave="this.style.transform='scale(1)'">
@@ -1290,67 +1299,67 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
     </div>
     <div class="testi-card reveal delay-1">
       <div class="stars">★★★★★</div>
-      <p class="testi-text">"Mình không có nền tảng tập luyện trước đó, nhưng Đạt đã xây lộ trình từ đầu rất bài bản. Sau 5 tháng Lifestyle Coaching, mình xuống 12kg và quan trọng hơn là không bị rebound."</p>
+      <p class="testi-text" data-i18n="testi4.text">"Mình không có nền tảng tập luyện trước đó, nhưng Đạt đã xây lộ trình từ đầu rất bài bản. Sau 5 tháng Lifestyle Coaching, mình xuống 12kg và quan trọng hơn là không bị rebound."</p>
       <div class="testi-author"><div class="testi-avatar">L</div><div><div class="testi-name">Lê Thị Phương Mai</div><div class="testi-goal" data-i18n="testi4.goal">Lifestyle Coaching · -12kg · Không rebound</div></div></div>
     </div>
     <div class="testi-card reveal delay-2">
       <div class="stars">★★★★★</div>
-      <p class="testi-text">"Mình đã thử nhiều HLV trước đó nhưng không ai theo dõi sát như KumaCoach. Check-in hàng tuần, phản hồi trong ngày, giáo án điều chỉnh liên tục theo số liệu thực — đây mới là coaching thật sự."</p>
+      <p class="testi-text" data-i18n="testi5.text">"Mình đã thử nhiều HLV trước đó nhưng không ai theo dõi sát như KumaCoach. Check-in hàng tuần, phản hồi trong ngày, giáo án điều chỉnh liên tục theo số liệu thực — đây mới là coaching thật sự."</p>
       <div class="testi-author"><div class="testi-avatar">V</div><div><div class="testi-name">Vũ Quang Huy</div><div class="testi-goal" data-i18n="testi5.goal">Physique Coaching · 6 tháng</div></div></div>
     </div>
     <div class="testi-card reveal delay-3">
       <div class="stars">★★★★★</div>
-      <p class="testi-text">"Đạt Kuma là người đầu tiên giải thích cho mình hiểu tại sao lại cần ăn bao nhiêu protein, tại sao volume quan trọng hơn tạ nặng. Kiến thức đó giúp mình tự tập được sau coaching."</p>
+      <p class="testi-text" data-i18n="testi6.text">"Đạt Kuma là người đầu tiên giải thích cho mình hiểu tại sao lại cần ăn bao nhiêu protein, tại sao volume quan trọng hơn tạ nặng. Kiến thức đó giúp mình tự tập được sau coaching."</p>
       <div class="testi-author"><div class="testi-avatar">P</div><div><div class="testi-name">Phạm Văn Đức</div><div class="testi-goal" data-i18n="testi6.goal">Physique Coaching · +7kg cơ</div></div></div>
     </div>
     <div class="testi-card reveal delay-1">
       <div class="stars">★★★★★</div>
-      <p class="testi-text">"Thi đấu IFBB lần đầu mà đạt Top 5 Bikini — điều mình không nghĩ là có thể. Coach plan từng ngày trong peak week, chỉnh carb loading rất chi tiết. Cảm ơn team KumaCoach."</p>
+      <p class="testi-text" data-i18n="testi7.text">"Thi đấu IFBB lần đầu mà đạt Top 5 Bikini — điều mình không nghĩ là có thể. Coach plan từng ngày trong peak week, chỉnh carb loading rất chi tiết. Cảm ơn team KumaCoach."</p>
       <div class="testi-author"><div class="testi-avatar">N</div><div><div class="testi-name">Nguyễn Thị Lan Anh</div><div class="testi-goal" data-i18n="testi7.goal">Contest Prep · Top 5 Bikini IFBB</div></div></div>
     </div>
     <div class="testi-card reveal delay-2">
       <div class="stars">★★★★★</div>
-      <p class="testi-text">"Mình là dân văn phòng, lịch tập không ổn định. Đạt chỉnh giáo án theo đúng lịch làm việc của mình, không cứng nhắc. 3 tháng Lifestyle Coaching và cân nặng về mức mình muốn rồi giữ được."</p>
+      <p class="testi-text" data-i18n="testi8.text">"Mình là dân văn phòng, lịch tập không ổn định. Đạt chỉnh giáo án theo đúng lịch làm việc của mình, không cứng nhắc. 3 tháng Lifestyle Coaching và cân nặng về mức mình muốn rồi giữ được."</p>
       <div class="testi-author"><div class="testi-avatar">T</div><div><div class="testi-name">Trương Minh Tuấn</div><div class="testi-goal" data-i18n="testi8.goal">Lifestyle Coaching · -7kg · Bền vững</div></div></div>
     </div>
     <div class="testi-card reveal delay-3">
       <div class="stars">★★★★★</div>
-      <p class="testi-text">"Bench press của mình từ 80kg lên 112kg sau một chu kỳ Powerlifting Coaching. Kỹ thuật được sửa hoàn toàn từ đầu — mình tập nhiều năm nhưng chưa bao giờ tập đúng cho đến khi gặp KumaCoach."</p>
+      <p class="testi-text" data-i18n="testi9.text">"Bench press của mình từ 80kg lên 112kg sau một chu kỳ Powerlifting Coaching. Kỹ thuật được sửa hoàn toàn từ đầu — mình tập nhiều năm nhưng chưa bao giờ tập đúng cho đến khi gặp KumaCoach."</p>
       <div class="testi-author"><div class="testi-avatar">B</div><div><div class="testi-name">Bùi Quốc Hùng</div><div class="testi-goal" data-i18n="testi9.goal">Powerlifting · Bench +32kg</div></div></div>
     </div>
     <div class="testi-card reveal delay-1">
       <div class="stars">★★★★★</div>
-      <p class="testi-text">"Mình đăng ký để chuẩn bị cho đám cưới, muốn giảm mỡ và săn chắc lại. Kết quả sau 4 tháng vượt xa kỳ vọng — -10kg mỡ, giữ cơ tốt và quan trọng là mình biết cách ăn uống khoa học hơn hẳn."</p>
+      <p class="testi-text" data-i18n="testi10.text">"Mình đăng ký để chuẩn bị cho đám cưới, muốn giảm mỡ và săn chắc lại. Kết quả sau 4 tháng vượt xa kỳ vọng — -10kg mỡ, giữ cơ tốt và quan trọng là mình biết cách ăn uống khoa học hơn hẳn."</p>
       <div class="testi-author"><div class="testi-avatar">Đ</div><div><div class="testi-name">Đặng Thị Hương</div><div class="testi-goal" data-i18n="testi10.goal">Lifestyle Coaching · -10kg · Trước đám cưới</div></div></div>
     </div>
     <div class="testi-card reveal delay-2">
       <div class="stars">★★★★★</div>
-      <p class="testi-text">"Mình đã thi đấu nhiều năm nhưng chưa có Overall lần nào. Sau một mùa prep với Đạt Kuma, mình đạt Overall Champion tại giải tỉnh. Phương pháp peak week của Đạt rất chuẩn, không có gì bị sai."</p>
+      <p class="testi-text" data-i18n="testi11.text">"Mình đã thi đấu nhiều năm nhưng chưa có Overall lần nào. Sau một mùa prep với Đạt Kuma, mình đạt Overall Champion tại giải tỉnh. Phương pháp peak week của Đạt rất chuẩn, không có gì bị sai."</p>
       <div class="testi-author"><div class="testi-avatar">L</div><div><div class="testi-name">Lý Thành Nam</div><div class="testi-goal" data-i18n="testi11.goal">Contest Prep · Overall Champion</div></div></div>
     </div>
     <div class="testi-card reveal delay-3">
       <div class="stars">★★★★★</div>
-      <p class="testi-text">"Trước khi vào KumaCoach, mình tập 2 năm mà không thấy kết quả rõ ràng. Sau 3 tháng Physique Coaching, cơ thể thay đổi rõ ràng hơn bất kỳ giai đoạn nào trước đó. Giáo án và dinh dưỡng làm thay đổi mọi thứ."</p>
+      <p class="testi-text" data-i18n="testi12.text">"Trước khi vào KumaCoach, mình tập 2 năm mà không thấy kết quả rõ ràng. Sau 3 tháng Physique Coaching, cơ thể thay đổi rõ ràng hơn bất kỳ giai đoạn nào trước đó. Giáo án và dinh dưỡng làm thay đổi mọi thứ."</p>
       <div class="testi-author"><div class="testi-avatar">M</div><div><div class="testi-name">Mai Thị Ngọc Trâm</div><div class="testi-goal" data-i18n="testi12.goal">Physique Coaching · Kết quả rõ sau 3 tháng</div></div></div>
     </div>
     <div class="testi-card reveal delay-1">
       <div class="stars">★★★★★</div>
-      <p class="testi-text">"Deadlift của mình từ 120kg lên 175kg sau 6 tháng. Đạt không chỉ lên chu kỳ mà còn dạy mình cách đọc body signal, biết khi nào cần nghỉ, khi nào cần push. Đó là thứ quan trọng nhất mình học được."</p>
+      <p class="testi-text" data-i18n="testi13.text">"Deadlift của mình từ 120kg lên 175kg sau 6 tháng. Đạt không chỉ lên chu kỳ mà còn dạy mình cách đọc body signal, biết khi nào cần nghỉ, khi nào cần push. Đó là thứ quan trọng nhất mình học được."</p>
       <div class="testi-author"><div class="testi-avatar">Đ</div><div><div class="testi-name">Đinh Văn Khánh</div><div class="testi-goal" data-i18n="testi13.goal">Powerlifting · Deadlift 175kg</div></div></div>
     </div>
     <div class="testi-card reveal delay-2">
       <div class="stars">★★★★★</div>
-      <p class="testi-text">"Sau sinh con, mình tăng 18kg và không biết bắt đầu từ đâu. KumaCoach lên lộ trình phù hợp với phụ nữ sau sinh — nhẹ nhàng lúc đầu, dần dần tăng cường độ. 6 tháng về đúng cân nặng trước sinh."</p>
+      <p class="testi-text" data-i18n="testi14.text">"Sau sinh con, mình tăng 18kg và không biết bắt đầu từ đâu. KumaCoach lên lộ trình phù hợp với phụ nữ sau sinh — nhẹ nhàng lúc đầu, dần dần tăng cường độ. 6 tháng về đúng cân nặng trước sinh."</p>
       <div class="testi-author"><div class="testi-avatar">P</div><div><div class="testi-name">Phan Thị Bích Ngân</div><div class="testi-goal" data-i18n="testi14.goal">Lifestyle Coaching · Phục hồi sau sinh</div></div></div>
     </div>
     <div class="testi-card reveal delay-3">
       <div class="stars">★★★★★</div>
-      <p class="testi-text">"Coaching online nhưng cảm giác sát sao hơn nhiều HLV offline mình từng gặp. Hỏi bất cứ lúc nào đều có phản hồi, mỗi tuần đều có điều chỉnh cụ thể theo số liệu. Đây là chuẩn mực coaching theo mình."</p>
+      <p class="testi-text" data-i18n="testi15.text">"Coaching online nhưng cảm giác sát sao hơn nhiều HLV offline mình từng gặp. Hỏi bất cứ lúc nào đều có phản hồi, mỗi tuần đều có điều chỉnh cụ thể theo số liệu. Đây là chuẩn mực coaching theo mình."</p>
       <div class="testi-author"><div class="testi-avatar">N</div><div><div class="testi-name">Ngô Thị Thu Hằng</div><div class="testi-goal" data-i18n="testi15.goal">Physique Coaching · 4 tháng</div></div></div>
     </div>
     <div class="testi-card reveal delay-1">
       <div class="stars">★★★★★</div>
-      <p class="testi-text">"Mình học được rất nhiều từ KumaCoach — không chỉ là giáo án mà là cách tư duy về training. Bây giờ mình tự lên được kế hoạch cho mình, hiểu tại sao mỗi quyết định được đưa ra. Đó là giá trị thật sự."</p>
+      <p class="testi-text" data-i18n="testi16.text">"Mình học được rất nhiều từ KumaCoach — không chỉ là giáo án mà là cách tư duy về training. Bây giờ mình tự lên được kế hoạch cho mình, hiểu tại sao mỗi quyết định được đưa ra. Đó là giá trị thật sự."</p>
       <div class="testi-author"><div class="testi-avatar">H</div><div><div class="testi-name">Huỳnh Tấn Phát</div><div class="testi-goal" data-i18n="testi16.goal">Physique Coaching · Tư duy training</div></div></div>
     </div>
   </div>
@@ -1381,7 +1390,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
   <div class="cart-footer">
     <div class="cart-total-row">
       <span class="cart-total-label" data-i18n="cart.totalLabel">Tổng cộng</span>
-      <span class="cart-total-price" id="cartTotal">0 ₫</span>
+      <span class="cart-total-price" id="cartTotal">0 vnđ</span>
     </div>
     <button class="cart-checkout-btn" id="cartCheckoutBtn" disabled onclick="checkout()">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -1568,7 +1577,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 
     <!-- Header -->
     <div style="padding:20px 24px 0;display:flex;align-items:center;justify-content:space-between">
-      <div style="font-size:13px;font-weight:900;letter-spacing:2px;color:#D4A017;text-transform:uppercase">🛒 Đặt Hàng</div>
+      <div style="font-size:13px;font-weight:900;letter-spacing:2px;color:#D4A017;text-transform:uppercase" data-vi="🛒 Đặt Hàng" data-en="🛒 Order">🛒 Đặt Hàng</div>
       <button onclick="closePaymentModal()" style="background:rgba(255,255,255,.06);border:none;color:#888;font-size:16px;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'">✕</button>
     </div>
 
@@ -1581,9 +1590,9 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
       <div class="step-dot" id="dot3" style="width:28px;height:28px;border-radius:50%;background:#1a1a1a;border:2px solid #2a2a2a;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#555;flex-shrink:0;transition:.4s">3</div>
     </div>
     <div style="display:flex;padding:6px 24px 0;justify-content:space-between">
-      <span style="font-size:10px;color:#D4A017;font-weight:700;letter-spacing:1px">THÔNG TIN</span>
-      <span id="label2" style="font-size:10px;color:#444;font-weight:700;letter-spacing:1px;transition:.4s">THANH TOÁN</span>
-      <span id="label3" style="font-size:10px;color:#444;font-weight:700;letter-spacing:1px;transition:.4s">HOÀN TẤT</span>
+      <span style="font-size:10px;color:#D4A017;font-weight:700;letter-spacing:1px" data-vi="THÔNG TIN" data-en="INFO">THÔNG TIN</span>
+      <span id="label2" style="font-size:10px;color:#444;font-weight:700;letter-spacing:1px;transition:.4s" data-vi="THANH TOÁN" data-en="PAYMENT">THANH TOÁN</span>
+      <span id="label3" style="font-size:10px;color:#444;font-weight:700;letter-spacing:1px;transition:.4s" data-vi="HOÀN TẤT" data-en="DONE">HOÀN TẤT</span>
     </div>
 
     <!-- ── STEP 1: Thông tin ── -->
@@ -1594,19 +1603,19 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
       <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
         <div style="position:relative">
           <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;color:#444">👤</span>
-          <input id="orderName" type="text" placeholder="Họ và tên *" style="background:#111;border:1px solid #222;color:#fff;padding:13px 16px 13px 38px;border-radius:8px;font-size:14px;outline:none;width:100%;box-sizing:border-box;transition:.2s" onfocus="this.style.borderColor='#D4A017'" onblur="this.style.borderColor='#222'">
+          <input id="orderName" type="text" placeholder="Họ và tên *" data-ph-vi="Họ và tên *" data-ph-en="Full name *" style="background:#111;border:1px solid #222;color:#fff;padding:13px 16px 13px 38px;border-radius:8px;font-size:14px;outline:none;width:100%;box-sizing:border-box;transition:.2s" onfocus="this.style.borderColor='#D4A017'" onblur="this.style.borderColor='#222'">
         </div>
         <div style="position:relative">
           <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;color:#444">📱</span>
-          <input id="orderPhone" type="tel" placeholder="Số điện thoại *" style="background:#111;border:1px solid #222;color:#fff;padding:13px 16px 13px 38px;border-radius:8px;font-size:14px;outline:none;width:100%;box-sizing:border-box;transition:.2s" onfocus="this.style.borderColor='#D4A017'" onblur="this.style.borderColor='#222'">
+          <input id="orderPhone" type="tel" placeholder="Số điện thoại *" data-ph-vi="Số điện thoại *" data-ph-en="Phone number *" style="background:#111;border:1px solid #222;color:#fff;padding:13px 16px 13px 38px;border-radius:8px;font-size:14px;outline:none;width:100%;box-sizing:border-box;transition:.2s" onfocus="this.style.borderColor='#D4A017'" onblur="this.style.borderColor='#222'">
         </div>
         <div style="position:relative">
           <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;color:#444">✉️</span>
-          <input id="orderEmail" type="email" placeholder="Email nhận ebook *" style="background:#111;border:1px solid #222;color:#fff;padding:13px 16px 13px 38px;border-radius:8px;font-size:14px;outline:none;width:100%;box-sizing:border-box;transition:.2s" onfocus="this.style.borderColor='#D4A017'" onblur="this.style.borderColor='#222'">
+          <input id="orderEmail" type="email" placeholder="Email nhận ebook *" data-ph-vi="Email nhận ebook *" data-ph-en="Email to receive ebook *" style="background:#111;border:1px solid #222;color:#fff;padding:13px 16px 13px 38px;border-radius:8px;font-size:14px;outline:none;width:100%;box-sizing:border-box;transition:.2s" onfocus="this.style.borderColor='#D4A017'" onblur="this.style.borderColor='#222'">
         </div>
       </div>
-      <div id="step1Err" style="display:none;background:rgba(220,50,50,.1);border:1px solid rgba(220,50,50,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:#f88;margin-bottom:12px">⚠️ Vui lòng điền đầy đủ thông tin.</div>
-      <button onclick="goToStep2()" style="width:100%;padding:14px;background:var(--gold);color:#000;font-weight:900;font-size:13px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:8px;cursor:pointer;transition:.2s" onmouseover="this.style.background='#f5c430'" onmouseout="this.style.background='var(--gold)'">
+      <div id="step1Err" style="display:none;background:rgba(220,50,50,.1);border:1px solid rgba(220,50,50,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:#f88;margin-bottom:12px" data-vi="⚠️ Vui lòng điền đầy đủ thông tin." data-en="⚠️ Please fill in all required information.">⚠️ Vui lòng điền đầy đủ thông tin.</div>
+      <button onclick="goToStep2()" style="width:100%;padding:14px;background:var(--gold);color:#000;font-weight:900;font-size:13px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:8px;cursor:pointer;transition:.2s" onmouseover="this.style.background='#f5c430'" onmouseout="this.style.background='var(--gold)'" data-vi="TIẾP THEO → THANH TOÁN" data-en="NEXT → PAYMENT">
         TIẾP THEO → THANH TOÁN
       </button>
     </div>
@@ -1615,50 +1624,50 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
     <div id="modalStep2" style="display:none;padding:20px 24px 24px">
       <!-- Mã đơn hàng -->
       <div style="background:#111;border-radius:10px;padding:12px 16px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase">Mã đơn hàng</span>
+        <span style="font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase" data-vi="Mã đơn hàng" data-en="Order code">Mã đơn hàng</span>
         <span id="orderCodeDisplay" style="font-size:13px;font-weight:900;color:#D4A017;letter-spacing:2px"></span>
       </div>
       <!-- Bank info + QR -->
       <div style="background:#111;border-radius:12px;padding:16px;margin-bottom:14px">
         <div style="text-align:center;margin-bottom:14px">
           <img src="https://img.vietqr.io/image/BIDV-96247AN1312-compact2.png?accountName=VO%20QUOC%20AN" style="width:150px;height:150px;object-fit:contain;border-radius:10px;border:2px solid rgba(212,160,23,.25);background:#fff;padding:4px" alt="QR BIDV">
-          <div style="font-size:11px;color:#555;margin-top:8px">Quét QR bằng app ngân hàng</div>
+          <div style="font-size:11px;color:#555;margin-top:8px" data-vi="Quét QR bằng app ngân hàng" data-en="Scan QR with banking app">Quét QR bằng app ngân hàng</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:8px">
           <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #1a1a1a">
-            <span style="font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase">Ngân hàng</span>
+            <span style="font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase" data-vi="Ngân hàng" data-en="Bank">Ngân hàng</span>
             <span style="font-size:13px;font-weight:800;color:#1a6fc4">BIDV</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #1a1a1a">
-            <span style="font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase">Số tài khoản</span>
+            <span style="font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase" data-vi="Số tài khoản" data-en="Account number">Số tài khoản</span>
             <div style="display:flex;align-items:center;gap:8px">
               <span style="font-size:16px;font-weight:900;color:#fff;letter-spacing:2px" id="stkDisplay">96247AN1312</span>
               <button onclick="copySTK()" id="copyBtn" title="Copy" style="background:rgba(212,160,23,.12);border:1px solid rgba(212,160,23,.25);color:#D4A017;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;transition:.2s">COPY</button>
             </div>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #1a1a1a">
-            <span style="font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase">Chủ tài khoản</span>
+            <span style="font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase" data-vi="Chủ tài khoản" data-en="Account holder">Chủ tài khoản</span>
             <span style="font-size:13px;font-weight:800;color:#fff">VO QUOC AN</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0">
-            <span style="font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase">Nội dung CK</span>
+            <span style="font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase" data-vi="Nội dung CK" data-en="Transfer content">Nội dung CK</span>
             <span id="noteDisplay" style="font-size:12px;font-weight:700;color:#D4A017;max-width:200px;text-align:right"></span>
           </div>
         </div>
       </div>
       <!-- Tổng tiền -->
       <div style="background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.2);border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center">
-        <span style="font-size:12px;color:#aaa;font-weight:600">Tổng tiền cần chuyển</span>
+        <span style="font-size:12px;color:#aaa;font-weight:600" data-vi="Tổng tiền cần chuyển" data-en="Total amount to transfer">Tổng tiền cần chuyển</span>
         <span id="totalDisplay" style="font-size:20px;font-weight:900;color:#D4A017"></span>
       </div>
       <!-- Warning -->
       <div style="background:rgba(255,200,0,.05);border:1px solid rgba(255,200,0,.15);border-radius:8px;padding:10px 14px;margin-bottom:16px;display:flex;gap:10px">
         <span style="flex-shrink:0">⚠️</span>
-        <p style="font-size:11px;color:#888;line-height:1.7;margin:0">Sau khi chuyển khoản, nhấn xác nhận bên dưới. <strong style="color:#ccc">Vui lòng chờ biên lai</strong> từ KumaCoach — ebook sẽ gửi qua email trong vòng <strong style="color:#ccc">24h</strong> sau khi xác nhận thanh toán.</p>
+        <p style="font-size:11px;color:#888;line-height:1.7;margin:0" data-vi-html="Sau khi chuyển khoản, nhấn xác nhận bên dưới. <strong style='color:#ccc'>Vui lòng chờ biên lai</strong> từ KumaCoach — ebook sẽ gửi qua email trong vòng <strong style='color:#ccc'>24h</strong> sau khi xác nhận thanh toán." data-en-html="After transferring, click confirm below. <strong style='color:#ccc'>Please wait for a receipt</strong> from KumaCoach — your ebook will be sent by email within <strong style='color:#ccc'>24h</strong> after payment is verified.">Sau khi chuyển khoản, nhấn xác nhận bên dưới. <strong style="color:#ccc">Vui lòng chờ biên lai</strong> từ KumaCoach — ebook sẽ gửi qua email trong vòng <strong style="color:#ccc">24h</strong> sau khi xác nhận thanh toán.</p>
       </div>
       <div style="display:flex;gap:10px">
-        <button onclick="goToStep1()" style="padding:14px 20px;background:transparent;color:#666;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;border:1px solid #222;border-radius:8px;cursor:pointer;transition:.2s" onmouseover="this.style.borderColor='#444';this.style.color='#aaa'" onmouseout="this.style.borderColor='#222';this.style.color='#666'">← QUAY LẠI</button>
-        <button id="paymentSubmitBtn" onclick="submitOrder()" style="flex:1;padding:14px;background:var(--gold);color:#000;font-weight:900;font-size:12px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:8px;cursor:pointer;transition:.2s" onmouseover="this.style.background='#f5c430'" onmouseout="this.style.background='var(--gold)'">
+        <button onclick="goToStep1()" style="padding:14px 20px;background:transparent;color:#666;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;border:1px solid #222;border-radius:8px;cursor:pointer;transition:.2s" onmouseover="this.style.borderColor='#444';this.style.color='#aaa'" onmouseout="this.style.borderColor='#222';this.style.color='#666'" data-vi="← QUAY LẠI" data-en="← BACK">← QUAY LẠI</button>
+        <button id="paymentSubmitBtn" onclick="submitOrder()" style="flex:1;padding:14px;background:var(--gold);color:#000;font-weight:900;font-size:12px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:8px;cursor:pointer;transition:.2s" onmouseover="this.style.background='#f5c430'" onmouseout="this.style.background='var(--gold)'" data-vi="✓ ĐÃ CHUYỂN KHOẢN · XÁC NHẬN" data-en="✓ TRANSFERRED · CONFIRM">
           ✓ ĐÃ CHUYỂN KHOẢN · XÁC NHẬN
         </button>
       </div>
@@ -1667,14 +1676,14 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
     <!-- ── STEP 3: Thành công ── -->
     <div id="modalStep3" style="display:none;padding:36px 24px 32px;text-align:center">
       <div style="width:64px;height:64px;border-radius:50%;background:rgba(0,166,81,.12);border:2px solid #00a651;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px">✓</div>
-      <div style="font-size:18px;font-weight:900;color:#fff;margin-bottom:8px">Đặt hàng thành công!</div>
+      <div style="font-size:18px;font-weight:900;color:#fff;margin-bottom:8px" data-vi="Đặt hàng thành công!" data-en="Order placed successfully!">Đặt hàng thành công!</div>
       <div id="successCode" style="font-size:12px;color:#D4A017;letter-spacing:2px;margin-bottom:16px"></div>
-      <p style="font-size:13px;color:#888;line-height:1.8;margin-bottom:24px">
+      <p style="font-size:13px;color:#888;line-height:1.8;margin-bottom:24px" data-vi-html="Chúng tôi đã nhận đơn hàng của bạn.<br><strong style='color:#ccc'>Vui lòng chờ biên lai xác nhận</strong> — ebook sẽ được gửi qua email sau khi kiểm tra thanh toán.<br><br>Thắc mắc? Nhắn tin qua <a href='https://www.facebook.com/ThanhDatPham281' target='_blank' style='color:#D4A017;text-decoration:none;font-weight:700'>Facebook</a> hoặc <a href='https://www.instagram.com/teamkumacoaching/' target='_blank' style='color:#D4A017;text-decoration:none;font-weight:700'>Instagram</a>." data-en-html="We've received your order.<br><strong style='color:#ccc'>Please wait for a confirmation receipt</strong> — your ebook will be sent by email after payment is verified.<br><br>Questions? Message us on <a href='https://www.facebook.com/ThanhDatPham281' target='_blank' style='color:#D4A017;text-decoration:none;font-weight:700'>Facebook</a> or <a href='https://www.instagram.com/teamkumacoaching/' target='_blank' style='color:#D4A017;text-decoration:none;font-weight:700'>Instagram</a>.">
         Chúng tôi đã nhận đơn hàng của bạn.<br>
         <strong style="color:#ccc">Vui lòng chờ biên lai xác nhận</strong> — ebook sẽ được gửi qua email sau khi kiểm tra thanh toán.<br><br>
         Thắc mắc? Nhắn tin qua <a href="https://www.facebook.com/ThanhDatPham281" target="_blank" style="color:#D4A017;text-decoration:none;font-weight:700">Facebook</a> hoặc <a href="https://www.instagram.com/teamkumacoaching/" target="_blank" style="color:#D4A017;text-decoration:none;font-weight:700">Instagram</a>.
       </p>
-      <button onclick="closePaymentModal()" style="width:100%;padding:14px;background:var(--gold);color:#000;font-weight:900;font-size:12px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:8px;cursor:pointer">
+      <button onclick="closePaymentModal()" style="width:100%;padding:14px;background:var(--gold);color:#000;font-weight:900;font-size:12px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:8px;cursor:pointer" data-vi="ĐÓNG" data-en="CLOSE">
         ĐÓNG
       </button>
     </div>
@@ -1693,7 +1702,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">
-    <img src="assets/Logo_Kumacoach_2.png" alt="KumaCoach" class="logo-remove-bg" style="height:81px;width:auto;display:block;object-fit:contain;filter:brightness(1.05)"/>
+    <img src="assets/logos/Logo_Kumacoach_2.png" alt="KumaCoach" class="logo-remove-bg" style="height:81px;width:auto;display:block;object-fit:contain;filter:brightness(1.05)"/>
   </div>
   <div class="footer-links">
     <a href="https://www.facebook.com/datphamtraining" target="_blank" rel="noopener">Facebook</a>
@@ -1769,8 +1778,8 @@ const countObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.achiev-num').forEach((el, i) => {
   const vals = [17, 30, 500, 10];
   const suffixes = ['×', '×', '+', '+'];
-  el.dataset.count = vals[i];
-  el.dataset.suffix = suffixes[i];
+  if (!el.dataset.count) el.dataset.count = vals[i]; // CMS may have already set this
+  if (!el.dataset.suffix) el.dataset.suffix = suffixes[i];
   countObserver.observe(el);
 });
 
@@ -2071,7 +2080,7 @@ function renderCart() {
 
   if (items.length === 0) {
     list.innerHTML = '<div class="cart-empty">Giỏ hàng trống</div>';
-    total.textContent = '0 ₫';
+    total.textContent = '0 vnđ';
     return;
   }
 
@@ -2083,13 +2092,13 @@ function renderCart() {
       + '<img class="cart-item-img" src="'+item.img+'" alt="'+item.title+'">'
       + '<div class="cart-item-info">'
       + '<div class="cart-item-title">'+item.title+'</div>'
-      + '<div class="cart-item-price">'+item.price.toLocaleString('vi-VN')+' ₫</div>'
+      + '<div class="cart-item-price">'+item.price.toLocaleString('vi-VN')+' vnđ</div>'
       + '</div>'
       + '<button class="cart-item-remove" onclick="removeFromCart(\''+item.id+'\')">✕</button>'
       + '</div>';
   });
   list.innerHTML = html;
-  total.textContent = sum.toLocaleString('vi-VN') + ' ₫';
+  total.textContent = sum.toLocaleString('vi-VN') + ' vnđ';
 }
 
 function openCart() {
@@ -2127,9 +2136,9 @@ function checkout() {
   // Order summary
   var html = '<div style="font-size:10px;font-weight:800;letter-spacing:1px;color:#555;text-transform:uppercase;margin-bottom:8px">Đơn hàng của bạn</div>';
   items.forEach(function(item){
-    html += '<div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:#ccc;font-size:13px">'+ item.title +'</span><span style="color:#D4A017;font-weight:800;font-size:13px">'+ item.price.toLocaleString('vi-VN') +'₫</span></div>';
+    html += '<div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:#ccc;font-size:13px">'+ item.title +'</span><span style="color:#D4A017;font-weight:800;font-size:13px">'+ item.price.toLocaleString('vi-VN') +' vnđ</span></div>';
   });
-  html += '<div style="border-top:1px solid #1e1e1e;margin-top:8px;padding-top:8px;display:flex;justify-content:space-between"><span style="font-weight:700;color:#fff">Tổng cộng</span><span style="font-weight:900;color:#D4A017;font-size:16px">'+ sum.toLocaleString('vi-VN') +'₫</span></div>';
+  html += '<div style="border-top:1px solid #1e1e1e;margin-top:8px;padding-top:8px;display:flex;justify-content:space-between"><span style="font-weight:700;color:#fff">Tổng cộng</span><span style="font-weight:900;color:#D4A017;font-size:16px">'+ sum.toLocaleString('vi-VN') +' vnđ</span></div>';
   document.getElementById('modalOrderSummary').innerHTML = html;
 
   // Reset
@@ -2160,7 +2169,7 @@ function goToStep2() {
   _orderCode = genOrderCode();
   document.getElementById('orderCodeDisplay').textContent = _orderCode;
   document.getElementById('noteDisplay').textContent = _orderCode;
-  document.getElementById('totalDisplay').textContent = _orderTotal.toLocaleString('vi-VN') + '₫';
+  document.getElementById('totalDisplay').textContent = _orderTotal.toLocaleString('vi-VN') + ' vnđ';
   var btn = document.getElementById('paymentSubmitBtn');
   btn.disabled = false;
   btn.textContent = '✓ ĐÃ CHUYỂN KHOẢN · XÁC NHẬN';
@@ -2324,7 +2333,7 @@ document.getElementById('cartOverlay').addEventListener('click', closeCart);
 <!-- MESSENGER FLOAT BUTTON -->
 <a class="messenger-float" href="https://www.messenger.com/t/ThanhDatPham281?text=Ch%C3%A0o%20b%E1%BA%A1n%2C%20t%C3%B4i%20mu%E1%BB%91n%20t%C3%ACm%20hi%E1%BB%83u%20v%E1%BB%81%20d%E1%BB%8Bch%20v%E1%BB%A5%20hu%E1%BA%A5n%20luy%E1%BB%87n%20c%C3%A1%20nh%C3%A2n%20c%E1%BB%A7a%20KumaCoach%2C%20vui%20l%C3%B2ng%20g%E1%BB%ADi%20cho%20t%C3%B4i%20th%C3%AAm%20th%C3%B4ng%20tin%20chi%20ti%E1%BA%BFt" target="_blank" rel="noopener" aria-label="Chat với KumaCoach qua Messenger">
   <svg class="messenger-float-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.879 1.408 5.44 3.614 7.117L5.616 21l2.667-1.352C9.173 20.208 10.553 20.5 12 20.5c5.523 0 10-4.145 10-9.257C22 6.145 17.523 2 12 2zm1.2 12.493-2.7-2.867-5.1 2.867 5.7-6.12 2.7 2.867 5.1-2.867-5.7 6.12z"/></svg>
-  <span>Tư Vấn</span>
+  <span data-vi="Tư Vấn" data-en="Consult">Tư Vấn</span>
 </a>
 
 <!-- i18n -->
@@ -2363,15 +2372,15 @@ vi:{
   'svc.tag':'Dịch Vụ',
   'svc.h2':'CHỌN LỘ TRÌNH<br/>PHÙ HỢP VỚI BẠN',
   'svc.link':'Đăng Ký →',
-  'svc1.price':'10.000.000đ / 3 tháng',
+  'svc1.price':'10.000.000 vnđ / 3 tháng',
   'svc1.desc':'Dành cho vận động viên muốn bước lên sân khấu ở trạng thái tốt nhất — theo dõi sát từng ngày.',
   'svc1.features':'<li>Giáo án tập chuyên biệt thi đấu</li><li>Dinh dưỡng theo giai đoạn</li><li>Peak Week chuẩn hoá</li><li>Check-in liên tục · Hỏi thăm mỗi ngày</li><li>Theo dõi sát từng ngày</li>',
   'svc5.title':'Gói 12 Tuần · Standard',
-  'svc5.price':'7.000.000đ / 12 tuần',
+  'svc5.price':'7.000.000 vnđ / 12 tuần',
   'svc5.desc':'Phù hợp cho người muốn cải thiện thể hình hoặc chuẩn bị thi đấu — giám sát 2 lần mỗi tuần.',
   'svc5.features':'<li>Giáo án cá nhân hoá</li><li>Dinh dưỡng theo giai đoạn</li><li>Check-in 2 lần / tuần</li><li>2 tuần peak: check-in thường xuyên hơn</li><li>Phản hồi trong ngày làm việc</li>',
   'svc6.title':'Gói Làm Việc Cùng Team Lord Coaching · Trung Quốc',
-  'svc6.price':'60.000.000đ / 1 năm',
+  'svc6.price':'60.000.000 vnđ / 1 năm',
   'svc6.desc':'Chương trình cao cấp dành cho VĐV nghiêm túc — hợp tác trực tiếp cùng Team Lord Coaching (Trung Quốc), đội ngũ đã tạo ra hơn <b style="color:#ccc">40+ IFBB PRO CARD</b> trên toàn thế giới. Được coach trực tiếp bởi các PRO COACH của team, theo dõi & điều chỉnh liên tục suốt cả năm.',
   'svc6.features':'<li>Dinh dưỡng theo từng giai đoạn</li><li>Được Team Lord trực tiếp prep</li><li>Hướng dẫn kỹ thuật tập luyện chuyên sâu</li><li>Theo dõi & điều chỉnh liên tục cả năm</li>',
   'svc3.desc':'Tối đa hoá sức mạnh Squat · Bench · Deadlift với chu kỳ periodisation chuẩn quốc tế.',
@@ -2419,9 +2428,28 @@ vi:{
   'testi14.goal':'Lifestyle Coaching · Phục hồi sau sinh',
   'testi15.goal':'Physique Coaching · 4 tháng',
   'testi16.goal':'Physique Coaching · Tư duy training',
+  'testi4.text':'"Mình không có nền tảng tập luyện trước đó, nhưng Đạt đã xây lộ trình từ đầu rất bài bản. Sau 5 tháng Lifestyle Coaching, mình xuống 12kg và quan trọng hơn là không bị rebound."',
+  'testi5.text':'"Mình đã thử nhiều HLV trước đó nhưng không ai theo dõi sát như KumaCoach. Check-in hàng tuần, phản hồi trong ngày, giáo án điều chỉnh liên tục theo số liệu thực — đây mới là coaching thật sự."',
+  'testi6.text':'"Đạt Kuma là người đầu tiên giải thích cho mình hiểu tại sao lại cần ăn bao nhiêu protein, tại sao volume quan trọng hơn tạ nặng. Kiến thức đó giúp mình tự tập được sau coaching."',
+  'testi7.text':'"Thi đấu IFBB lần đầu mà đạt Top 5 Bikini — điều mình không nghĩ là có thể. Coach plan từng ngày trong peak week, chỉnh carb loading rất chi tiết. Cảm ơn team KumaCoach."',
+  'testi8.text':'"Mình là dân văn phòng, lịch tập không ổn định. Đạt chỉnh giáo án theo đúng lịch làm việc của mình, không cứng nhắc. 3 tháng Lifestyle Coaching và cân nặng về mức mình muốn rồi giữ được."',
+  'testi9.text':'"Bench press của mình từ 80kg lên 112kg sau một chu kỳ Powerlifting Coaching. Kỹ thuật được sửa hoàn toàn từ đầu — mình tập nhiều năm nhưng chưa bao giờ tập đúng cho đến khi gặp KumaCoach."',
+  'testi10.text':'"Mình đăng ký để chuẩn bị cho đám cưới, muốn giảm mỡ và săn chắc lại. Kết quả sau 4 tháng vượt xa kỳ vọng — -10kg mỡ, giữ cơ tốt và quan trọng là mình biết cách ăn uống khoa học hơn hẳn."',
+  'testi11.text':'"Mình đã thi đấu nhiều năm nhưng chưa có Overall lần nào. Sau một mùa prep với Đạt Kuma, mình đạt Overall Champion tại giải tỉnh. Phương pháp peak week của Đạt rất chuẩn, không có gì bị sai."',
+  'testi12.text':'"Trước khi vào KumaCoach, mình tập 2 năm mà không thấy kết quả rõ ràng. Sau 3 tháng Physique Coaching, cơ thể thay đổi rõ ràng hơn bất kỳ giai đoạn nào trước đó. Giáo án và dinh dưỡng làm thay đổi mọi thứ."',
+  'testi13.text':'"Deadlift của mình từ 120kg lên 175kg sau 6 tháng. Đạt không chỉ lên chu kỳ mà còn dạy mình cách đọc body signal, biết khi nào cần nghỉ, khi nào cần push. Đó là thứ quan trọng nhất mình học được."',
+  'testi14.text':'"Sau sinh con, mình tăng 18kg và không biết bắt đầu từ đâu. KumaCoach lên lộ trình phù hợp với phụ nữ sau sinh — nhẹ nhàng lúc đầu, dần dần tăng cường độ. 6 tháng về đúng cân nặng trước sinh."',
+  'testi15.text':'"Coaching online nhưng cảm giác sát sao hơn nhiều HLV offline mình từng gặp. Hỏi bất cứ lúc nào đều có phản hồi, mỗi tuần đều có điều chỉnh cụ thể theo số liệu. Đây là chuẩn mực coaching theo mình."',
+  'testi16.text':'"Mình học được rất nhiều từ KumaCoach — không chỉ là giáo án mà là cách tư duy về training. Bây giờ mình tự lên được kế hoạch cho mình, hiểu tại sao mỗi quyết định được đưa ra. Đó là giá trị thật sự."',
   'students.tag':'Học Viên Thi Đấu',
   'students.h2':'HỌC VIÊN TRÊN<br/>SÂN KHẤU',
   'students.body':'Kết quả thực tế từ các vận động viên được KumaCoach dẫn dắt tại các giải đấu NPC · IFBB · Global Classic.',
+  'ebook1.desc':'<li>Ghi nhận sự thay đổi cơ thể qua quá trình tập</li><li>Chương trình tập luyện cụ thể, hướng dẫn rõ ràng</li><li>Kiến thức cơ bản về các nhóm cơ</li><li>Hướng dẫn áp dụng chương trình hiệu quả</li><li>Giải đáp câu hỏi thường gặp</li>',
+  'ebook2.desc':'<li>5 nguyên tắc cơ bản trong bodybuilding</li><li>Cách theo dõi tiến độ tập luyện</li><li>Giáo án tập luyện rõ ràng, dễ áp dụng</li><li>Kiến thức giải phẫu cơ bản</li><li>Hướng dẫn sử dụng program hiệu quả</li><li>Giải đáp câu hỏi thường gặp</li>',
+  'ebook3.desc':'<li>5 nguyên tắc cơ bản trong bodybuilding</li><li>Cách theo dõi tiến độ</li><li>Giáo án tập luyện (Program)</li><li>Kiến thức giải phẫu cơ bản</li><li>Hướng dẫn sử dụng giáo án</li><li>Giải đáp câu hỏi thường gặp</li>',
+  'ebook4.desc':'<li>Kiến thức nền tảng về sức khoẻ & bodybuilding</li><li>Dinh dưỡng & lối sống lành mạnh</li><li>Chương trình tập luyện cho người mới bắt đầu</li><li>Theo dõi tiến độ</li><li>Kiến thức giải phẫu cơ bản</li><li>Giải đáp câu hỏi thường gặp</li>',
+  'ebook5.desc':'<li>5 nguyên tắc cơ bản trong bodybuilding</li><li>Theo dõi tiến độ</li><li>Chương trình tập luyện (Program)</li><li>Giải phẫu cơ bản (Basic Anatomy)</li><li>Cách sử dụng chương trình</li><li>Câu hỏi thường gặp</li>',
+  'ebook6.desc':'<li>5 Nguyên tắc cơ bản trong Bodybuilding</li><li>Theo dõi tiến độ</li><li>Anatomy căn bản</li><li>Program</li><li>Cách sử dụng Program</li><li>Câu hỏi</li>',
   'feedback.h2':'KẾT QUẢ THỰC TẾ<br/>TỪ HỌC VIÊN',
   'feedback.body':'Hơn 500 học viên đã thay đổi — đây là một phần hành trình của họ cùng KumaCoach.',
   'ebook.body':'Hệ thống giáo án được thiết kế bởi Đạt Kuma — khoa học, thực chiến, áp dụng ngay.',
@@ -2470,15 +2498,15 @@ en:{
   'svc.tag':'Services',
   'svc.h2':'CHOOSE THE PATH<br/>THAT FITS YOU',
   'svc.link':'Register →',
-  'svc1.price':'10,000,000₫ / 3 months',
+  'svc1.price':'10,000,000 vnđ / 3 months',
   'svc1.desc':'For athletes who want to step on stage at their absolute best — daily monitoring throughout.',
   'svc1.features':'<li>Competition-specific training program</li><li>Phase-based nutrition planning</li><li>Standardized Peak Week protocol</li><li>Continuous check-ins · Daily contact</li><li>Close daily monitoring</li>',
   'svc5.title':'12-Week Package · Standard',
-  'svc5.price':'7,000,000₫ / 12 weeks',
+  'svc5.price':'7,000,000 vnđ / 12 weeks',
   'svc5.desc':'Ideal for those improving their physique or preparing to compete — 2 check-ins per week.',
   'svc5.features':'<li>Personalized training program</li><li>Phase-based nutrition</li><li>Check-in 2× per week</li><li>Final 2 weeks (peak): more frequent check-ins</li><li>Response within working hours</li>',
   'svc6.title':'Partner Package with Team Lord Coaching · China 🇨🇳',
-  'svc6.price':'60,000,000₫ / 1 year',
+  'svc6.price':'60.000.000 vnđ / 1 year',
   'svc6.desc':'A premium program for serious athletes — direct collaboration with Team Lord Coaching (China), the team behind <b style="color:#ccc">40+ IFBB PRO CARDs</b> worldwide. Coached directly by the team\'s PRO COACHes, with continuous monitoring & adjustments throughout the year.',
   'svc6.features':'<li>Phase-based nutrition planning</li><li>Direct prep by Team Lord</li><li>In-depth technique coaching</li><li>Year-round monitoring & adjustments</li>',
   'svc3.desc':'Maximize your Squat · Bench · Deadlift strength with internationally standardized periodization cycles.',
@@ -2526,9 +2554,28 @@ en:{
   'testi14.goal':'Lifestyle Coaching · Postpartum recovery',
   'testi15.goal':'Physique Coaching · 4 months',
   'testi16.goal':'Physique Coaching · Training mindset',
+  'testi4.text':'"I had no training background, but Dat built a structured plan from scratch. After 5 months of Lifestyle Coaching, I lost 12kg — and more importantly, no rebound."',
+  'testi5.text':'"I\'d tried many coaches before, but none monitored me as closely as KumaCoach. Weekly check-ins, same-day feedback, programs continuously adjusted to real data — this is what real coaching looks like."',
+  'testi6.text':'"Dat Kuma was the first to explain why I needed that amount of protein, why volume matters more than weight. That knowledge helped me train on my own after coaching."',
+  'testi7.text':'"My first IFBB competition and I placed Top 5 Bikini — something I never thought possible. Coach planned every day of peak week, fine-tuned carb loading in detail. Thank you KumaCoach team."',
+  'testi8.text':'"I\'m an office worker with an unpredictable schedule. Dat adapted the program to my actual work hours — no rigidity. 3 months of Lifestyle Coaching and I hit my target weight and kept it."',
+  'testi9.text':'"My bench press went from 80kg to 112kg after one Powerlifting Coaching cycle. My technique was rebuilt from the ground up — I\'d trained for years but never trained correctly until I met KumaCoach."',
+  'testi10.text':'"I signed up to prepare for my wedding — wanted to lose fat and tone up. The results after 4 months exceeded my expectations: -10kg fat, kept my muscle, and most importantly I now know how to eat properly."',
+  'testi11.text':'"I\'d competed for many years but never won Overall. After one prep season with Dat Kuma, I took Overall Champion at the provincial competition. His peak week method is precise — nothing goes wrong."',
+  'testi12.text':'"Before KumaCoach, I trained 2 years with no visible results. After 3 months of Physique Coaching, my body changed more than in any previous period. The program and nutrition changed everything."',
+  'testi13.text':'"My deadlift went from 120kg to 175kg in 6 months. Dat didn\'t just write programs — he taught me to read body signals, know when to rest, when to push. That\'s the most valuable thing I learned."',
+  'testi14.text':'"After giving birth, I gained 18kg and didn\'t know where to start. KumaCoach built a postpartum-appropriate plan — gentle at first, gradually increasing intensity. In 6 months I returned to my pre-pregnancy weight."',
+  'testi15.text':'"Online coaching yet more attentive than any in-person coach I\'d had. Responsive any time, weekly adjustments based on real data. This is the gold standard of coaching in my opinion."',
+  'testi16.text':'"I learned so much from KumaCoach — not just programs but a training mindset. Now I can plan my own training and understand why each decision is made. That\'s the real value."',
   'students.tag':'Competition Athletes',
   'students.h2':'STUDENTS ON<br/>STAGE',
   'students.body':'Real results from athletes coached by KumaCoach at NPC · IFBB · Global Classic competitions.',
+  'ebook1.desc':'<li>Track your body transformation through the program</li><li>Specific training program with clear instructions</li><li>Basic knowledge of muscle groups</li><li>How to apply the program effectively</li><li>Frequently asked questions answered</li>',
+  'ebook2.desc':'<li>5 fundamental principles of bodybuilding</li><li>How to track training progress</li><li>Clear, easy-to-apply training program</li><li>Basic anatomy knowledge</li><li>How to use the program effectively</li><li>Frequently asked questions answered</li>',
+  'ebook3.desc':'<li>5 fundamental principles of bodybuilding</li><li>How to track progress</li><li>Training program (Program)</li><li>Basic anatomy knowledge</li><li>How to use the program</li><li>Frequently asked questions answered</li>',
+  'ebook4.desc':'<li>Foundational knowledge of health & bodybuilding</li><li>Nutrition & healthy lifestyle</li><li>Training program for beginners</li><li>Progress tracking</li><li>Basic anatomy knowledge</li><li>Frequently asked questions answered</li>',
+  'ebook5.desc':'<li>5 fundamental principles of bodybuilding</li><li>Progress tracking</li><li>Training program</li><li>Basic Anatomy</li><li>How to use the program</li><li>Frequently asked questions</li>',
+  'ebook6.desc':'<li>5 fundamental principles of Bodybuilding</li><li>Progress tracking</li><li>Basic anatomy</li><li>Program</li><li>How to use the Program</li><li>Q&A</li>',
   'feedback.h2':'REAL RESULTS<br/>FROM STUDENTS',
   'feedback.body':'Over 500 athletes transformed — here is a glimpse of their journey with KumaCoach.',
   'ebook.body':'A training system designed by Dat Kuma — science-based, battle-tested, ready to apply.',
@@ -2570,6 +2617,37 @@ window.filterPage = function(group) {
   window.scrollTo({top: 0, behavior: 'smooth'});
 };
 
+/* ── Inline text translations (no HTML attribute needed) ── */
+var _tierOriginals = null;
+var _tierEN = {
+  '3 THÁNG':'3 MONTHS','6 THÁNG':'6 MONTHS','12 THÁNG':'12 MONTHS',
+  'GÓI 3 THÁNG':'3-MONTH PACKAGE','GÓI 6 THÁNG':'6-MONTH PACKAGE','GÓI 12 THÁNG':'12-MONTH PACKAGE',
+  '12 tuần':'12 weeks','24 tuần + tặng 4 tuần':'24 weeks + 4 bonus weeks',
+  '48 tuần + 4 tuần':'48 weeks + 4 weeks','48 tuần + tặng 4 tuần':'48 weeks + 4 bonus weeks',
+  'Ưu đãi so với gói ngắn hạn':'Discounted vs. shorter packages',
+  '+ 02 session 1:1 Online · 60 phút/session':'+ 02 1:1 Online sessions · 60 min/session',
+  '+ 02 session Call Online Training 1:1 · 60 phút/session':'+ 02 1:1 Online Training sessions · 60 min/session',
+  '+ 02 session Call Online Live Coaching · 60 phút/session':'+ 02 Online Live Coaching sessions · 60 min/session',
+  'STANDARD · Check-in 2 lần / tuần · 2 tuần peak check thường xuyên hơn':'STANDARD · 2 check-ins / week · More frequent check-ins in final 2 weeks',
+  'VIP · Check-in liên tục · Hỏi thăm & theo dõi sát mỗi ngày':'VIP · Continuous check-ins · Daily contact & close monitoring',
+  'Profile chính · Coaching':'Main profile · Coaching','Kiến thức · Bài viết':'Knowledge · Articles',
+  'Kênh chính · Personal':'Main channel · Personal','Kiến thức · Coaching':'Knowledge · Coaching',
+  'Team · Kết quả học viên':'Team · Student results','Video · Kiến thức chuyên sâu':'Videos · In-depth knowledge'
+};
+function _initTierOriginals(){
+  if(_tierOriginals) return;
+  _tierOriginals = new Map();
+  document.querySelectorAll('.svc-tier-label,.svc-tier-duration,.svc-tier-note,.svc-row-header,.social-link-desc').forEach(function(el){
+    _tierOriginals.set(el, el.textContent.trim());
+  });
+}
+function _applyTierTranslations(lang){
+  _initTierOriginals();
+  _tierOriginals.forEach(function(vi,el){
+    el.textContent = (lang==='en' && _tierEN[vi]) ? _tierEN[vi] : vi;
+  });
+}
+
 function applyLang(lang){
   document.querySelectorAll('[data-i18n]').forEach(function(el){
     var key = el.getAttribute('data-i18n');
@@ -2579,6 +2657,19 @@ function applyLang(lang){
     var key = el.getAttribute('data-i18n-html');
     if(T[lang][key] !== undefined) el.innerHTML = T[lang][key];
   });
+  document.querySelectorAll('[data-vi]').forEach(function(el){
+    var val = el.getAttribute('data-'+lang);
+    if(val !== null) el.textContent = val;
+  });
+  document.querySelectorAll('[data-vi-html]').forEach(function(el){
+    var val = el.getAttribute('data-'+lang+'-html');
+    if(val !== null) el.innerHTML = val;
+  });
+  document.querySelectorAll('[data-ph-vi]').forEach(function(el){
+    var val = el.getAttribute('data-ph-'+lang);
+    if(val !== null) el.placeholder = val;
+  });
+  _applyTierTranslations(lang);
   document.documentElement.lang = lang;
   document.getElementById('btnVI').classList.toggle('active', lang==='vi');
   document.getElementById('btnEN').classList.toggle('active', lang==='en');
@@ -2596,6 +2687,42 @@ window.setLang = function(lang){
   try{ saved = localStorage.getItem('kuma-lang'); }catch(e){}
   if(saved && T[saved]) applyLang(saved);
 })();
+})();
+</script>
+
+<!-- ── GOOGLE SHEETS CMS ── -->
+<script>
+(function loadCMS(){
+  /* PASTE YOUR GOOGLE SHEET CSV URL BELOW */
+  var SHEET_URL = 'https://docs.google.com/spreadsheets/d/1-QXao7RuHbztzQYGvNw8fjuKReJ_daVN9A0sdnjKTPI/gviz/tq?tqx=out:csv&gid=0';
+
+  if(!SHEET_URL) return;
+
+  fetch(SHEET_URL)
+    .then(function(r){ return r.text(); })
+    .then(function(csv){
+      var data = {};
+      csv.trim().split('\n').slice(1).forEach(function(line){
+        var parts = line.split(',');
+        if(parts.length >= 2){
+          var key = parts[0].trim().replace(/"/g,'');
+          var val = parseInt(parts[1].trim().replace(/"/g,''), 10);
+          data[key] = val;
+        }
+      });
+
+      /* update every element with data-cms attribute */
+      document.querySelectorAll('[data-cms]').forEach(function(el){
+        var key = el.getAttribute('data-cms');
+        var suffix = el.getAttribute('data-suffix') || '';
+        if(data[key] !== undefined){
+          var num = data[key];
+          el.textContent = num + suffix;
+          el.dataset.count = num; /* for counter animation */
+        }
+      });
+    })
+    .catch(function(){}); /* silent fail — shows hardcoded defaults */
 })();
 </script>
 </body>
