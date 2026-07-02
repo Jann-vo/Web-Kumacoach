@@ -509,8 +509,8 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
         <a href="#services" class="btn-secondary" data-i18n="hero.btnSecondary">Xem Dịch Vụ</a>
       </div>
       <div class="hero-stats reveal delay-4">
-        <div class="stat"><div class="stat-num" data-cms="students" data-suffix="+">501+</div><div class="stat-label" data-i18n="stat.students">Học Viên</div></div>
-        <div class="stat"><div class="stat-num" data-cms="overalls" data-suffix="×">18×</div><div class="stat-label">Overalls</div></div>
+        <div class="stat"><div class="stat-num" data-cms="students" data-suffix="+">700+</div><div class="stat-label" data-i18n="stat.students">Học Viên</div></div>
+        <div class="stat"><div class="stat-num" data-cms="overalls" data-suffix="×">17×</div><div class="stat-label">Overalls</div></div>
         <div class="stat"><div class="stat-num" data-cms="first_place" data-suffix="×">30×</div><div class="stat-label">1st Place</div></div>
       </div>
     </div>
@@ -533,7 +533,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
     <div class="achiev-grid">
       <div class="achiev-item reveal delay-1">
         <div class="achiev-icon">🏆</div>
-        <div class="achiev-num" data-cms="overalls" data-suffix="×">18×</div>
+        <div class="achiev-num" data-cms="overalls" data-suffix="×">17×</div>
         <div class="achiev-label">Overalls</div>
         <div class="achiev-sub">Overall Champion</div>
       </div>
@@ -545,13 +545,13 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
       </div>
       <div class="achiev-item reveal delay-3">
         <div class="achiev-icon">👤</div>
-        <div class="achiev-num" data-cms="students" data-suffix="+">501+</div>
+        <div class="achiev-num" data-cms="students" data-suffix="+">700+</div>
         <div class="achiev-label" data-i18n="stat.students">Học Viên</div>
         <div class="achiev-sub" data-i18n="achiev.coached">Đã Huấn Luyện</div>
       </div>
       <div class="achiev-item reveal delay-4">
         <div class="achiev-icon">📅</div>
-        <div class="achiev-num" data-cms="years" data-suffix="+">11+</div>
+        <div class="achiev-num" data-cms="years" data-suffix="+">10+</div>
         <div class="achiev-label" data-i18n="achiev.years">Năm</div>
         <div class="achiev-sub" data-i18n="achiev.experience">Kinh Nghiệm</div>
       </div>
@@ -1778,7 +1778,7 @@ const countObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 
 document.querySelectorAll('.achiev-num').forEach((el, i) => {
-  const vals = [18, 30, 501, 11];
+  const vals = [17, 30, 700, 10];
   const suffixes = ['×', '×', '+', '+'];
   if (!el.dataset.count) el.dataset.count = vals[i];
   if (!el.dataset.suffix) el.dataset.suffix = suffixes[i];
@@ -2278,33 +2278,7 @@ document.getElementById('cartOverlay').addEventListener('click', closeCart);
   })();
 })();
 
-/* ── 2. COUNTER ANIMATION ── */
-(function(){
-  var stats = document.querySelectorAll('.stat-num');
-  if(!stats.length) return;
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(!entry.isIntersecting) return;
-      var el = entry.target;
-      io.unobserve(el);
-      var raw   = el.textContent.trim();
-      var num   = parseFloat(raw.replace(/[^0-9.]/g,''));
-      var suffix = raw.replace(/[0-9.]/g,'');
-      if(isNaN(num)) return;
-      var start = performance.now();
-      var dur   = 1600;
-      (function tick(now){
-        var p = Math.min((now-start)/dur, 1);
-        var ease = 1-Math.pow(1-p,4);
-        var val  = Math.round(num*ease);
-        el.textContent = val + suffix;
-        if(p<1) requestAnimationFrame(tick);
-        else el.textContent = raw;
-      })(start);
-    });
-  },{threshold:.5});
-  stats.forEach(function(el){ io.observe(el); });
-})();
+/* ── 2. COUNTER ANIMATION (stat-num removed — CMS owns these values) ── */
 
 /* ── 3. MAGNETIC BUTTONS ── */
 (function(){
