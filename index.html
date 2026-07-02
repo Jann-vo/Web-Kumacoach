@@ -509,8 +509,8 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
         <a href="#services" class="btn-secondary" data-i18n="hero.btnSecondary">Xem Dịch Vụ</a>
       </div>
       <div class="hero-stats reveal delay-4">
-        <div class="stat"><div class="stat-num" data-cms="students" data-suffix="+">500+</div><div class="stat-label" data-i18n="stat.students">Học Viên</div></div>
-        <div class="stat"><div class="stat-num" data-cms="overalls" data-suffix="×">17×</div><div class="stat-label">Overalls</div></div>
+        <div class="stat"><div class="stat-num" data-cms="students" data-suffix="+">501+</div><div class="stat-label" data-i18n="stat.students">Học Viên</div></div>
+        <div class="stat"><div class="stat-num" data-cms="overalls" data-suffix="×">18×</div><div class="stat-label">Overalls</div></div>
         <div class="stat"><div class="stat-num" data-cms="first_place" data-suffix="×">30×</div><div class="stat-label">1st Place</div></div>
       </div>
     </div>
@@ -533,7 +533,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
     <div class="achiev-grid">
       <div class="achiev-item reveal delay-1">
         <div class="achiev-icon">🏆</div>
-        <div class="achiev-num" data-cms="overalls" data-suffix="×">17×</div>
+        <div class="achiev-num" data-cms="overalls" data-suffix="×">18×</div>
         <div class="achiev-label">Overalls</div>
         <div class="achiev-sub">Overall Champion</div>
       </div>
@@ -545,13 +545,13 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
       </div>
       <div class="achiev-item reveal delay-3">
         <div class="achiev-icon">👤</div>
-        <div class="achiev-num" data-cms="students" data-suffix="+">500+</div>
+        <div class="achiev-num" data-cms="students" data-suffix="+">501+</div>
         <div class="achiev-label" data-i18n="stat.students">Học Viên</div>
         <div class="achiev-sub" data-i18n="achiev.coached">Đã Huấn Luyện</div>
       </div>
       <div class="achiev-item reveal delay-4">
         <div class="achiev-icon">📅</div>
-        <div class="achiev-num" data-cms="years" data-suffix="+">10+</div>
+        <div class="achiev-num" data-cms="years" data-suffix="+">11+</div>
         <div class="achiev-label" data-i18n="achiev.years">Năm</div>
         <div class="achiev-sub" data-i18n="achiev.experience">Kinh Nghiệm</div>
       </div>
@@ -1252,10 +1252,10 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
       <div class="reveal delay-3" style="grid-column:span 4;grid-row:span 1;border-radius:14px;overflow:hidden;position:relative;background:#111;min-height:360px">
         <img src="assets/athletes/728093498_17994448046993676_454867307270717180_n.jpg"
              style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s"
-             alt="Học viên KumaCoach NPC Worldwide Pro Qualifier Classic Physique"
+             alt="Học viên KumaCoach NPC Worldwide Pro Qualifier Men's Physique"
              onmouseenter="this.style.transform='scale(1.04)'" onmouseleave="this.style.transform='scale(1)'">
         <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 18px;background:linear-gradient(transparent,rgba(0,0,0,.8))">
-          <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:var(--gold)">NPC WORLDWIDE · CLASSIC PHYSIQUE</div>
+          <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:var(--gold)">NPC WORLDWIDE · MEN'S PHYSIQUE</div>
         </div>
       </div>
 
@@ -1778,9 +1778,9 @@ const countObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 
 document.querySelectorAll('.achiev-num').forEach((el, i) => {
-  const vals = [17, 30, 500, 10];
+  const vals = [18, 30, 501, 11];
   const suffixes = ['×', '×', '+', '+'];
-  if (!el.dataset.count) el.dataset.count = vals[i]; // CMS may have already set this
+  if (!el.dataset.count) el.dataset.count = vals[i];
   if (!el.dataset.suffix) el.dataset.suffix = suffixes[i];
   countObserver.observe(el);
 });
@@ -2725,8 +2725,18 @@ window.setLang = function(lang){
         var suffix = el.getAttribute('data-suffix') || '';
         if(data[key] !== undefined){
           var num = data[key];
-          el.textContent = num + suffix;
-          el.dataset.count = num; /* for counter animation */
+          el.dataset.count = num;
+          /* re-animate achiev-nums already in viewport with correct value */
+          if(el.classList.contains('achiev-num')){
+            var r = el.getBoundingClientRect();
+            if(r.top < window.innerHeight && r.bottom > 0){
+              if(typeof animateCount === 'function') animateCount(el, num, suffix);
+            } else {
+              el.textContent = num + suffix; /* not visible yet, just set text */
+            }
+          } else {
+            el.textContent = num + suffix;
+          }
         }
       });
     })
