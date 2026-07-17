@@ -359,7 +359,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 #ebook{padding:100px 40px;max-width:1200px;margin:0 auto}
 .ebook-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:48px}
 .ebook-card{background:#0e0e0e;border:1px solid #1a1a1a;border-radius:14px;overflow:hidden;transition:transform .35s,border-color .35s,box-shadow .35s;position:relative;display:flex;flex-direction:column}
-@media (hover:hover) and (pointer:fine){.ebook-card:hover{transform:translateY(-8px) scale(1.015);border-color:var(--gold);box-shadow:0 24px 60px rgba(212,160,23,.13)}}
+.ebook-card:hover{transform:translateY(-8px) scale(1.015);border-color:var(--gold);box-shadow:0 24px 60px rgba(212,160,23,.13)}
 .ebook-cover-wrap{position:relative;overflow:hidden;aspect-ratio:3/4;background:#111}
 .ebook-cover{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
 .ebook-card:hover .ebook-cover{transform:scale(1.05)}
@@ -370,7 +370,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 .ebook-desc li{font-size:11px;color:#777;line-height:1.4;padding-left:14px;position:relative}
 .ebook-desc li::before{content:'·';position:absolute;left:0;color:var(--gold);font-size:14px;line-height:1.1}
 .ebook-price{font-size:22px;font-weight:900;color:var(--gold);margin-bottom:16px;letter-spacing:.5px}
-.ebook-add-btn{width:100%;padding:13px;background:var(--gold);color:#000;font-weight:900;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:8px;cursor:pointer;transition:.25s;position:relative;overflow:hidden;z-index:1000}
+.ebook-add-btn{width:100%;padding:13px;background:var(--gold);color:#000;font-weight:900;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:8px;cursor:pointer;transition:.25s;position:relative;overflow:hidden}
 .ebook-add-btn:hover{background:#f0c030;transform:translateY(-1px)}
 .ebook-add-btn.in-cart{background:#1e3a1e;color:#4caf50;border:1px solid #4caf50}
 /* Cart icon in nav */
@@ -382,7 +382,7 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
 /* Cart sidebar */
 .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9000;opacity:0;pointer-events:none;transition:opacity .35s}
 .cart-overlay.open{opacity:1;pointer-events:auto}
-.cart-sidebar{position:fixed;top:0;right:-420px;width:400px;height:100vh;height:100dvh;background:#0a0a0a;border-left:1px solid #1a1a1a;z-index:9001;transition:right .4s cubic-bezier(.23,1,.32,1);display:flex;flex-direction:column;overflow:hidden}
+.cart-sidebar{position:fixed;top:0;right:-420px;width:400px;height:100vh;background:#0a0a0a;border-left:1px solid #1a1a1a;z-index:9001;transition:right .4s cubic-bezier(.23,1,.32,1);display:flex;flex-direction:column;overflow:hidden}
 .cart-sidebar.open{right:0}
 .cart-header{padding:24px 24px 20px;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .cart-header h3{font-size:14px;font-weight:900;letter-spacing:2px;color:#fff;text-transform:uppercase}
