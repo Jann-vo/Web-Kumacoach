@@ -2594,7 +2594,7 @@ en:{
 }
 };
 
-var currentLang = 'vi';
+window.currentLang = 'vi';
 
 /* ── PAGE FILTER ── */
 window.filterPage = function(group) {
@@ -2682,7 +2682,7 @@ function applyLang(lang){
 }
 
 window.setLang = function(lang){
-  currentLang = lang;
+  window.currentLang = lang;
   applyLang(lang);
   try{ localStorage.setItem('kuma-lang', lang); }catch(e){}
 };
