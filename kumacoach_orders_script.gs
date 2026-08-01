@@ -16,7 +16,7 @@ var EBOOK_LINKS = {
   'The Wellness Blueprint':                   'https://drive.google.com/file/d/1HbJAq3Vs7d7W5cTB3LNXZC9BG9N8Ih-k/view?usp=sharing',
   'The Classic Aesthetics Program':           'https://drive.google.com/file/d/10hyZIg5GGAr2F_UfPh9CWZI1NcoIpwvF/view?usp=sharing',
   'A Science-Based Guide to Building Muscle': 'https://drive.google.com/file/d/1VFXpCLRANL4y-4MFy3gMwojVRIB_fEGl/view?usp=sharing',
-  'An Toàn Trên Đường Đua':                   'https://drive.google.com/file/d/1xbz772mS3T6Zs9LEx0RGZcBbe__NGJQE/view?usp=drive_link'
+  'An Toàn Trên Đường Đua':                   'https://drive.google.com/file/d/12Wt0FGxhbJwGWIubBzOAs7EPa2ktNGRH/view?usp=drive_link'
 };
 
 // ── Entry point ───────────────────────────────────────────
