@@ -170,7 +170,7 @@ function sendCustomerPendingEmail(data, time) {
         ['Email nhận',  data.email || '']
       ])
     + '<div style="background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.2);border-radius:8px;padding:12px 16px;font-size:13px;color:#aaa;line-height:1.8;margin-top:16px">'
-    + '⚠️ Ebook sẽ được gửi trong vòng <strong style="color:#fff">24h</strong> sau khi xác nhận thanh toán.</div>'
+    + '⚠️ Ebook sẽ được gửi trong vòng <strong style="color:#fff">24h</strong> sau khi xác nhận thanh toán.<br>📩 Email chứa link tải có thể nằm ở mục <strong style="color:#fff">Thư rác / Quảng cáo</strong> — nhớ kiểm tra ở đó nếu chưa thấy.</div>'
     + footer()
   );
   MailApp.sendEmail({ to: data.email, subject: subject, htmlBody: html });
