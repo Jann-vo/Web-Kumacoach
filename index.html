@@ -2162,11 +2162,31 @@ var GAS_URL = 'https://script.google.com/macros/s/AKfycbymZw0gaSWUexI3TBeojLDW2o
 var _orderCode = '';
 var _orderNote = '';
 var _orderTotal = 0;
+var _orderRecorded = false;   // đã ghi đơn (Chờ xác nhận) lên server chưa
 
 function genOrderCode() {
   var d = new Date();
   var pad = function(n){ return n < 10 ? '0'+n : n; };
   return 'KUMA ' + d.getFullYear().toString().slice(2) + pad(d.getMonth()+1) + pad(d.getDate()) + ' ' + Math.floor(Math.random()*900+100);
+}
+
+// Ghi đơn (Chờ xác nhận) lên server NGAY khi hiện mã + STK — để Sepay có đơn
+// để khớp kể cả khi khách chuyển tiền xong rồi đóng tab (không bấm nút cuối).
+function recordPendingOrder() {
+  if (_orderRecorded || !_orderCode) return;   // chỉ ghi 1 lần cho mỗi mã
+  var name  = document.getElementById('orderName').value.trim();
+  var phone = document.getElementById('orderPhone').value.trim();
+  var email = document.getElementById('orderEmail').value.trim();
+  var items = Object.values(cart);
+  if (!items.length || !name || !phone || !email) return;
+  var itemNames = items.map(function(i){ return i.title; }).join(' | ');
+  var payload = { orderCode: _orderCode, name: name, phone: phone, email: email, note: _orderCode, items: itemNames, total: _orderTotal };
+  _orderRecorded = true;
+  fetch(GAS_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function(){ _orderRecorded = false; });   // lỗi mạng → cho phép thử lại
 }
 
 function checkout() {
@@ -2191,6 +2211,8 @@ function checkout() {
   document.getElementById('orderPhone').value = '';
   document.getElementById('orderEmail').value = '';
   document.getElementById('step1Err').style.display = 'none';
+  _orderCode = '';             // mỗi lần mở checkout = 1 mã mới
+  _orderRecorded = false;
   goToStep1();
   document.getElementById('paymentModal').style.display = 'flex';
 }
@@ -2211,10 +2233,11 @@ function goToStep2() {
     return;
   }
   document.getElementById('step1Err').style.display = 'none';
-  _orderCode = genOrderCode();
+  if (!_orderCode) _orderCode = genOrderCode();   // giữ 1 mã cho cả phiên checkout
   document.getElementById('orderCodeDisplay').textContent = _orderCode;
   document.getElementById('noteDisplay').textContent = _orderCode;
   document.getElementById('totalDisplay').textContent = _orderTotal.toLocaleString('vi-VN') + ' vnđ';
+  recordPendingOrder();   // ← GHI ĐƠN NGAY khi khách thấy mã + STK (không đợi nút cuối)
   var btn = document.getElementById('paymentSubmitBtn');
   btn.disabled = false;
   btn.textContent = currentLang === 'en' ? '✓ TRANSFERRED · CONFIRM' : '✓ ĐÃ CHUYỂN KHOẢN · XÁC NHẬN';
@@ -2256,33 +2279,15 @@ function copySTK() {
 }
 
 function submitOrder() {
-  var name  = document.getElementById('orderName').value.trim();
-  var phone = document.getElementById('orderPhone').value.trim();
-  var email = document.getElementById('orderEmail').value.trim();
-  var items = Object.values(cart);
-  var itemNames = items.map(function(i){ return i.title; }).join(' | ');
-  var btn = document.getElementById('paymentSubmitBtn');
-  btn.disabled = true;
-  btn.textContent = currentLang === 'en' ? 'Sending...' : 'Đang gửi...';
-
-  var payload = { orderCode: _orderCode, name: name, phone: phone, email: email, note: _orderCode, items: itemNames, total: _orderTotal };
-
-  fetch(GAS_URL, {
-    method: 'POST', mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).then(function(){
-    document.getElementById('successCode').textContent = (currentLang === 'en' ? 'Order code: ' : 'Mã đơn hàng: ') + _orderCode;
-    document.getElementById('modalStep2').style.display = 'none';
-    document.getElementById('modalStep3').style.display = 'block';
-    setStep(3);
-    cart = {};
-    renderCart();
-  }).catch(function(){
-    btn.disabled = false;
-    btn.textContent = currentLang === 'en' ? '✓ TRANSFERRED · CONFIRM' : '✓ ĐÃ CHUYỂN KHOẢN · XÁC NHẬN';
-    alert(currentLang === 'en' ? 'An error occurred. Please message us on Facebook or Instagram for support.' : 'Có lỗi xảy ra. Vui lòng nhắn tin qua Facebook hoặc Instagram để được hỗ trợ.');
-  });
+  // Đơn đã được ghi ở bước 2 (khi hiện mã). Gọi lại cho chắc (idempotent),
+  // rồi hiện màn hình thành công ngay — không phụ thuộc kết quả mạng.
+  recordPendingOrder();
+  document.getElementById('successCode').textContent = (currentLang === 'en' ? 'Order code: ' : 'Mã đơn hàng: ') + _orderCode;
+  document.getElementById('modalStep2').style.display = 'none';
+  document.getElementById('modalStep3').style.display = 'block';
+  setStep(3);
+  cart = {};
+  renderCart();
 }
 
 function closePaymentModal() {
