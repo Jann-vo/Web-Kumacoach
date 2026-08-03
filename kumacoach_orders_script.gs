@@ -78,7 +78,7 @@ function handleSepayWebhook(data) {
   var found = -1;
 
   for (var i = 1; i < rows.length; i++) {
-    if ((rows[i][1] || '').toString().toUpperCase() === orderCode &&
+    if (normCode(rows[i][1]) === orderCode &&
         rows[i][8] === 'Chờ xác nhận') {
       found = i + 1; // row index (1-based)
       break;
@@ -95,18 +95,19 @@ function handleSepayWebhook(data) {
   sheet.getRange(found, 9).setBackground('#d4edda').setFontColor('#155724');
 
   // Ghi thêm: số tiền thực nhận & thời gian xác nhận
-  var row       = rows[found - 1];
-  var custEmail = row[4];
-  var custName  = row[2];
-  var items     = row[6];
-  var orderAmt  = row[7];
+  var row         = rows[found - 1];
+  var codeDisplay = row[1] || orderCode;   // mã gốc có dấu cách để hiển thị cho khách
+  var custEmail   = row[4];
+  var custName    = row[2];
+  var items       = row[6];
+  var orderAmt    = row[7];
 
   // Gửi email xác nhận + link ebook cho khách
   if (custEmail) {
     sendCustomerConfirmedEmail({
       email     : custEmail,
       name      : custName,
-      orderCode : orderCode,
+      orderCode : codeDisplay,
       items     : items,
       total     : orderAmt
     });
@@ -114,7 +115,7 @@ function handleSepayWebhook(data) {
 
   // Thông báo admin
   sendAdminConfirmedEmail({
-    orderCode     : orderCode,
+    orderCode     : codeDisplay,
     name          : custName,
     email         : custEmail,
     items         : items,
@@ -122,14 +123,21 @@ function handleSepayWebhook(data) {
     transferAmount: data.transferAmount
   });
 
-  return ok({ status: 'confirmed', code: orderCode });
+  return ok({ status: 'confirmed', code: codeDisplay });
 }
 
-// ── Tìm mã KUMA trong nội dung CK ────────────────────────
+// ── Chuẩn hoá mã: bỏ MỌI ký tự không phải chữ/số, viết HOA ──
+// Ngân hàng/khách rất hay xoá dấu cách (hoặc thay bằng '-', '.') trong
+// nội dung CK, nên phải so khớp theo dạng đã chuẩn hoá — KHÔNG phụ thuộc dấu cách.
+function normCode(s) {
+  return String(s || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+}
+
+// ── Tìm mã KUMA trong nội dung CK (không phụ thuộc dấu cách) ──
 function extractOrderCode(content) {
-  // Tìm pattern: KUMA + space + 6 số + space + 3 số
-  var match = content.match(/KUMA\s+\d{6}\s+\d{3}/);
-  return match ? match[0] : null;
+  var flat  = normCode(content);            // "KUMA 260803 743" | "KUMA-260803-743" → "KUMA260803743"
+  var match = flat.match(/KUMA\d{6}\d{3}/); // YYMMDD (6 số) + 3 số ngẫu nhiên
+  return match ? match[0] : null;           // trả về dạng chuẩn hoá "KUMA260803743"
 }
 
 // ── Log giao dịch không khớp ──────────────────────────────
@@ -301,4 +309,48 @@ function testSepayWebhook() {
   };
   var result = handleSepayWebhook(fakeData);
   Logger.log(result.getContent());
+}
+
+function testExtract() {
+  // Kiểm tra regex khớp mã bất kể ngân hàng có giữ dấu cách hay không
+  ['KUMA 260803 743','KUMA260803743','KUMA-260803-743','CT DEN KUMA260803743 CAM ON']
+    .forEach(function(c){ Logger.log(c + '  →  ' + extractOrderCode(c)); });
+}
+
+// ══════════════════════════════════════════════════════════
+//  DỰ PHÒNG: xác nhận & gửi ebook THỦ CÔNG cho 1 đơn
+//  Dùng khi Sepay không tự khớp: mở sheet "Đơn Hàng", bấm vào
+//  hàng đơn cần giao → Menu 🛒 KumaCoach → Xác nhận & gửi ebook.
+// ══════════════════════════════════════════════════════════
+function confirmSelectedOrderManual() {
+  var ui    = SpreadsheetApp.getUi();
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+  if (!sheet) { ui.alert('Không tìm thấy sheet "' + SHEET_NAME + '".'); return; }
+
+  var row = sheet.getActiveRange().getRow();
+  if (row <= 1) { ui.alert('Hãy bấm chọn đúng HÀNG đơn hàng (không phải hàng tiêu đề).'); return; }
+
+  var v         = sheet.getRange(row, 1, 1, 9).getValues()[0];
+  var orderCode = v[1], name = v[2], email = v[4], items = v[6], total = v[7], status = v[8];
+  if (!email) { ui.alert('Hàng này không có email.'); return; }
+
+  if (String(status).indexOf('xác nhận') !== -1 && String(status).indexOf('Chờ') === -1) {
+    var r = ui.alert('Đơn này đã xác nhận rồi. Gửi lại link ebook?', ui.ButtonSet.YES_NO);
+    if (r !== ui.Button.YES) return;
+  }
+
+  sendCustomerConfirmedEmail({ email: email, name: name, orderCode: orderCode, items: items, total: total });
+
+  sheet.getRange(row, 9).setValue('✅ Đã xác nhận (thủ công)')
+       .setBackground('#d4edda').setFontColor('#155724');
+  ui.alert('✅ Đã gửi link ebook cho: ' + email);
+}
+
+// Tạo menu khi mở sheet. Nếu project này DÙNG CHUNG với script ebook (đã có
+// onOpen khác) thì bỏ hàm onOpen này đi và gộp addItem vào menu sẵn có.
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu('🛒 KumaCoach')
+    .addItem('✅ Xác nhận & gửi ebook (đơn đang chọn)', 'confirmSelectedOrderManual')
+    .addToUi();
 }
