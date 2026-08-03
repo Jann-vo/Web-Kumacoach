@@ -41,6 +41,17 @@ function handleNewOrder(data) {
   var sheet = getOrCreateSheet();
   var now   = timestamp();
 
+  // Chống ghi trùng: web ghi đơn 2 lần (sớm ở bước 2 khi hiện mã + lúc bấm nút xác nhận).
+  // Nếu mã đơn đã có trong sheet thì bỏ qua, KHÔNG ghi/không gửi email lần 2.
+  if (data.orderCode) {
+    var existing = sheet.getDataRange().getValues();
+    for (var j = 1; j < existing.length; j++) {
+      if (normCode(existing[j][1]) === normCode(data.orderCode)) {
+        return ok({ status: 'duplicate' });
+      }
+    }
+  }
+
   sheet.appendRow([
     now,
     data.orderCode || '',
@@ -344,6 +355,19 @@ function confirmSelectedOrderManual() {
   sheet.getRange(row, 9).setValue('✅ Đã xác nhận (thủ công)')
        .setBackground('#d4edda').setFontColor('#155724');
   ui.alert('✅ Đã gửi link ebook cho: ' + email);
+}
+
+// Gửi ebook + tạo đơn THỦ CÔNG cho 1 khách chưa có trong sheet (hiếm).
+// Sửa 5 biến dưới rồi Run hàm này trong editor.
+function rescueOrderManual() {
+  var CODE  = 'KUMA 000000 000';            // ← mã đơn (bịa cũng được)
+  var NAME  = 'Tên khách';                  // ←
+  var EMAIL = 'email_khach@gmail.com';      // ←
+  var ITEMS = 'The Model Elevate Program';  // ← đúng tên trong EBOOK_LINKS
+  var TOTAL = 1000000;                      // ←
+  sendCustomerConfirmedEmail({ email: EMAIL, name: NAME, orderCode: CODE, items: ITEMS, total: TOTAL });
+  getOrCreateSheet().appendRow([timestamp(), CODE, NAME, '', EMAIL, CODE, ITEMS, TOTAL, '✅ Đã xác nhận (thủ công)']);
+  Logger.log('Đã gửi ebook cho ' + EMAIL);
 }
 
 // Tạo menu khi mở sheet. Nếu project này DÙNG CHUNG với script ebook (đã có
