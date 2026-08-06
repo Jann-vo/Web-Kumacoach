@@ -414,7 +414,7 @@ function notifyUnmatched(data) {
   var base = ScriptApp.getService().getUrl() || GAS_EXEC_URL;
   var blocks = cands.map(function(c) {
     var link = base + '?action=confirm&token=' + encodeURIComponent(CONFIRM_TOKEN)
-             + '&code=' + encodeURIComponent(normCode(c.code)) + '&amount=' + amount;
+             + '&code=' + encodeURIComponent(normCode(c.code));
     return '<div style="border:1px solid #333;border-radius:8px;padding:14px;margin:12px 0">'
       + '<div style="color:#D4A017;font-weight:700;letter-spacing:1px">' + c.code + '</div>'
       + '<div style="color:#ccc;font-size:13px;margin-top:4px">' + c.name + ' · ' + c.email + '</div>'
