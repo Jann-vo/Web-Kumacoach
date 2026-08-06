@@ -1686,9 +1686,17 @@ footer{background:#050505;border-top:1px solid #1a1a1a;padding:36px 40px;display
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0">
             <span style="font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase" data-vi="Nội dung CK" data-en="Transfer content">Nội dung CK</span>
-            <span id="noteDisplay" style="font-size:12px;font-weight:700;color:#D4A017;max-width:200px;text-align:right"></span>
+            <div style="display:flex;align-items:center;gap:8px">
+              <span id="noteDisplay" style="font-size:15px;font-weight:900;color:#D4A017;letter-spacing:1px;text-align:right"></span>
+              <button onclick="copyNote()" id="copyNoteBtn" title="Copy" style="background:rgba(212,160,23,.12);border:1px solid rgba(212,160,23,.25);color:#D4A017;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;transition:.2s">COPY</button>
+            </div>
           </div>
         </div>
+      </div>
+      <!-- Cảnh báo nội dung CK bắt buộc -->
+      <div style="background:rgba(255,60,60,.08);border:1px solid rgba(255,80,80,.35);border-radius:8px;padding:10px 14px;margin-bottom:14px;display:flex;gap:10px">
+        <span style="flex-shrink:0">🔴</span>
+        <p style="font-size:12px;color:#ff9b9b;line-height:1.6;margin:0" data-vi-html="<strong style='color:#ffbcbc'>BẮT BUỘC ghi đúng NỘI DUNG CK</strong> ở trên khi chuyển khoản (bấm COPY cho chắc). Ghi sai/thiếu thì hệ thống không tự nhận ra đơn của bạn, ebook sẽ bị chậm." data-en-html="<strong style='color:#ffbcbc'>You MUST use the exact TRANSFER CONTENT</strong> above (tap COPY to be safe). Wrong/missing content means the system can't match your order and your ebook will be delayed.">BẮT BUỘC ghi đúng NỘI DUNG CK ở trên khi chuyển khoản (bấm COPY cho chắc). Ghi sai/thiếu thì hệ thống không tự nhận ra đơn của bạn, ebook sẽ bị chậm.</p>
       </div>
       <!-- Tổng tiền -->
       <div style="background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.2);border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center">
@@ -2274,6 +2282,19 @@ function setStep(n) {
 function copySTK() {
   navigator.clipboard.writeText('96247AN1312').then(function(){
     var btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ ĐÃ COPY';
+    btn.style.background = 'rgba(0,166,81,.15)';
+    btn.style.color = '#4cd98a';
+    btn.style.borderColor = 'rgba(0,166,81,.3)';
+    setTimeout(function(){ btn.textContent='COPY'; btn.style.background='rgba(212,160,23,.12)'; btn.style.color='#D4A017'; btn.style.borderColor='rgba(212,160,23,.25)'; }, 2000);
+  });
+}
+
+function copyNote() {
+  var code = (document.getElementById('noteDisplay').textContent || '').trim();
+  if (!code) return;
+  navigator.clipboard.writeText(code).then(function(){
+    var btn = document.getElementById('copyNoteBtn');
     btn.textContent = '✓ ĐÃ COPY';
     btn.style.background = 'rgba(0,166,81,.15)';
     btn.style.color = '#4cd98a';

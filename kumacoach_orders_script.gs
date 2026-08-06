@@ -8,6 +8,11 @@
 var SHEET_NAME  = 'Đơn Hàng';
 var ADMIN_EMAIL = 'voquocan.13122000@gmail.com';
 
+// Mã bí mật cho link "Xác nhận 1 chạm" trong email cảnh báo (có thể đổi thành chuỗi của bạn).
+var CONFIRM_TOKEN = 'kmc_x7Qp2Lr9Vt4Wn8Zc6Bd1Hf3Ms5Jy0Gk';
+// URL web app /exec (dự phòng khi ScriptApp.getService().getUrl() rỗng). Cập nhật nếu deploy đổi URL.
+var GAS_EXEC_URL  = 'https://script.google.com/macros/s/AKfycbymZw0gaSWUexI3TBeojLDW2o1NCyE5t3SQSQYV6FREM2bfmnl2JxCmi-cGHA7sQFY3/exec';
+
 // Map tên sản phẩm → link Google Drive (anyone with link can view)
 var EBOOK_LINKS = {
   'The Model Elevate Program':                'https://drive.google.com/file/d/1heSdztyVOtUGpZx84JCMHctQ6yzUr3cp/view?usp=sharing',
@@ -16,7 +21,7 @@ var EBOOK_LINKS = {
   'The Wellness Blueprint':                   'https://drive.google.com/file/d/1HbJAq3Vs7d7W5cTB3LNXZC9BG9N8Ih-k/view?usp=sharing',
   'The Classic Aesthetics Program':           'https://drive.google.com/file/d/10hyZIg5GGAr2F_UfPh9CWZI1NcoIpwvF/view?usp=sharing',
   'A Science-Based Guide to Building Muscle': 'https://drive.google.com/file/d/1VFXpCLRANL4y-4MFy3gMwojVRIB_fEGl/view?usp=sharing',
-  'An Toàn Trên Đường Đua':                   'https://drive.google.com/file/d/12Wt0FGxhbJwGWIubBzOAs7EPa2ktNGRH/view?usp=drive_link'
+  'An Toàn Trên Đường Đua':                   'https://drive.google.com/file/d/1D9vxTdSf9tJNsJmNEHKsT2C9DtGuEu9e/view?usp=drive_link'
 };
 
 // ── Entry point ───────────────────────────────────────────
@@ -78,8 +83,9 @@ function handleSepayWebhook(data) {
   // Tìm mã đơn KUMA trong nội dung CK
   var orderCode = extractOrderCode(content);
   if (!orderCode) {
-    // Không có mã KUMA — ghi nhận nhưng không tự confirm
+    // Không có mã KUMA — ghi nhận + CẢNH BÁO admin (khách CK quên ghi mã đơn)
     logUnmatchedTransaction(data);
+    notifyUnmatched(data);
     return ok({ status: 'no_match' });
   }
 
@@ -98,6 +104,7 @@ function handleSepayWebhook(data) {
 
   if (found === -1) {
     logUnmatchedTransaction(data);
+    notifyUnmatched(data);
     return ok({ status: 'order_not_found', code: orderCode });
   }
 
@@ -377,4 +384,99 @@ function onOpen() {
     .createMenu('🛒 KumaCoach')
     .addItem('✅ Xác nhận & gửi ebook (đơn đang chọn)', 'confirmSelectedOrderManual')
     .addToUi();
+}
+
+// ══════════════════════════════════════════════════════════
+//  CẢNH BÁO + XÁC NHẬN 1 CHẠM khi tiền vào KHÔNG khớp đơn
+//  (khách chuyển khoản quên ghi mã đơn → đơn kẹt "Chờ xác nhận")
+// ══════════════════════════════════════════════════════════
+
+// Sepay báo tiền vào mà không khớp mã → tìm đơn "Chờ xác nhận" có số tiền
+// gần khớp → email admin kèm nút "Xác nhận & gửi ebook". KHÔNG tự xác nhận.
+// Không có đơn nghi khớp thì KHÔNG gửi (tránh spam với tiền vào không liên quan).
+function notifyUnmatched(data) {
+  var amount = Number(data.transferAmount) || 0;
+  if (amount <= 0) return;
+  var sheet = getOrCreateSheet();
+  var rows  = sheet.getDataRange().getValues();
+  var cands = [];
+  for (var i = 1; i < rows.length; i++) {
+    if (String(rows[i][8] || '').indexOf('Chờ') < 0) continue;    // chỉ đơn đang chờ
+    var total = Number(rows[i][7]) || 0;
+    if (total > 0 && Math.abs(total - amount) <= 20000) {         // số tiền gần khớp (±20k)
+      cands.push({ code: rows[i][1], name: rows[i][2], email: rows[i][4],
+                   items: rows[i][6], total: total, time: rows[i][0] });
+    }
+  }
+  if (!cands.length) return;        // không có đơn nghi khớp → coi như tiền khác, không báo
+  cands.reverse();                  // đơn mới nhất lên đầu
+
+  var base = ScriptApp.getService().getUrl() || GAS_EXEC_URL;
+  var blocks = cands.map(function(c) {
+    var link = base + '?action=confirm&token=' + encodeURIComponent(CONFIRM_TOKEN)
+             + '&code=' + encodeURIComponent(normCode(c.code)) + '&amount=' + amount;
+    return '<div style="border:1px solid #333;border-radius:8px;padding:14px;margin:12px 0">'
+      + '<div style="color:#D4A017;font-weight:700;letter-spacing:1px">' + c.code + '</div>'
+      + '<div style="color:#ccc;font-size:13px;margin-top:4px">' + c.name + ' · ' + c.email + '</div>'
+      + '<div style="color:#ccc;font-size:13px">' + (c.items || '') + ' · '
+      + Number(c.total).toLocaleString() + ' ₫ · ' + c.time + '</div>'
+      + '<div style="margin-top:12px"><a href="' + link + '" '
+      + 'style="display:inline-block;background:#D4A017;color:#000;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:8px">'
+      + '✅ Xác nhận &amp; gửi ebook cho khách này</a></div></div>';
+  }).join('');
+
+  var html = emailWrap('⚠️ TIỀN VÀO CHƯA KHỚP ĐƠN — CẦN BẠN DUYỆT',
+    '<p style="color:#ccc;font-size:14px;line-height:1.8">Có tiền vào nhưng nội dung chuyển khoản '
+    + 'không chứa mã đơn nên hệ thống KHÔNG tự xác nhận.</p>'
+    + infoBox([
+        ['Số tiền nhận', '<strong style="color:#4cd98a">' + amount.toLocaleString() + ' ₫</strong>'],
+        ['Nội dung CK',  (data.content || data.code || '(trống)')],
+        ['Thời gian',    timestamp()]
+      ])
+    + '<p style="color:#ccc;font-size:14px;margin-top:16px">Đơn nghi khớp (bấm nút để xác nhận + gửi ebook):</p>'
+    + blocks
+    + '<p style="font-size:12px;color:#777;margin-top:8px">Chỉ bấm khi chắc đúng đơn. Bấm là khách của đơn đó nhận ebook ngay.</p>'
+    + footer());
+  MailApp.sendEmail({ to: ADMIN_EMAIL,
+    subject: '⚠️ Tiền vào chưa khớp đơn — cần duyệt [+' + amount.toLocaleString() + 'đ]',
+    htmlBody: html });
+}
+
+// Link "Xác nhận 1 chạm" từ email gọi vào đây. Mã bí mật chặn người ngoài.
+function doGet(e) {
+  var p = (e && e.parameter) || {};
+  if (p.token !== CONFIRM_TOKEN) return htmlPage_('❌ Không có quyền truy cập.');
+  if (p.action === 'confirm' && p.code) {
+    var r = confirmOrderByCode(p.code, Number(p.amount) || 0);
+    return htmlPage_((r.ok ? '✅ ' : '⚠️ ') + r.msg);
+  }
+  return htmlPage_('KumaCoach webhook đang hoạt động.');
+}
+
+// Xác nhận 1 đơn theo mã + gửi ebook (idempotent: đã xác nhận thì không gửi lại).
+function confirmOrderByCode(rawCode, transferAmount) {
+  var target = normCode(rawCode);
+  var sheet  = getOrCreateSheet();
+  var rows   = sheet.getDataRange().getValues();
+  for (var i = 1; i < rows.length; i++) {
+    if (normCode(rows[i][1]) !== target) continue;
+    if (String(rows[i][8]).indexOf('Đã xác nhận') >= 0)
+      return { ok: false, msg: 'Đơn ' + (rows[i][1] || rawCode) + ' đã được xác nhận trước đó.' };
+    sheet.getRange(i + 1, 9).setValue('✅ Đã xác nhận').setBackground('#d4edda').setFontColor('#155724');
+    var codeDisplay = rows[i][1] || rawCode;
+    var email = rows[i][4], name = rows[i][2], items = rows[i][6], total = rows[i][7];
+    if (email) sendCustomerConfirmedEmail({ email: email, name: name, orderCode: codeDisplay, items: items, total: total });
+    sendAdminConfirmedEmail({ orderCode: codeDisplay, name: name, email: email, items: items, total: total, transferAmount: transferAmount || total });
+    return { ok: true, msg: 'Đã xác nhận đơn ' + codeDisplay + ' và gửi ebook cho ' + (email || 'khách') + '.' };
+  }
+  return { ok: false, msg: 'Không tìm thấy đơn có mã ' + rawCode + '.' };
+}
+
+function htmlPage_(msg) {
+  return HtmlService.createHtmlOutput(
+    '<div style="font-family:Arial,sans-serif;background:#0d0d0d;color:#fff;min-height:100vh;padding:48px 20px;text-align:center">'
+    + '<div style="max-width:480px;margin:0 auto">'
+    + '<h2 style="color:#D4A017;margin-bottom:16px">KumaCoach</h2>'
+    + '<p style="font-size:17px;line-height:1.6">' + msg + '</p></div></div>')
+    .setTitle('KumaCoach');
 }
